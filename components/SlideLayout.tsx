@@ -105,7 +105,7 @@ export const SlideLayout: React.FC<SlideLayoutProps> = ({ data, isActive }) => {
           <div className="w-full h-full flex flex-col">
             <div className="flex-1 bg-white rounded-lg overflow-hidden border-4 relative" style={{ borderColor: accentColor }}>
               <div className="absolute top-0 left-0 bg-black text-white px-4 py-2 font-mono text-sm z-10 rounded-br-lg border-b border-r" style={{ borderColor: accentColor }}>
-                LIVE ENVIRONMENT :: {data.contentUrl}
+                {data.contentUrl}
               </div>
               <iframe 
                 src={data.contentUrl} 
