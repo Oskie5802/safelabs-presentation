@@ -101,7 +101,7 @@ export const SLIDES: SlideContent[] = [
   {
     id: 'live-demo-web',
     type: SlideType.IFRAME,
-    contentUrl: 'https://safelabs.pl',
+    contentUrl: 'https://safelabs.pl/sprawdz-haslo',
     icon: Globe,
   },
 
