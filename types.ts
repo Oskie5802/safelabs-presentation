@@ -20,5 +20,9 @@ export interface SlideContent {
   icon?: LucideIcon; 
   accentColor?: string; 
   contentUrl?: string; // URL dla iframe
-  images?: { url: string; caption?: string }[]; // Tablica zdjęć
+  images?: { 
+    url: string; 
+    caption?: string;
+    arrow?: { x: number; y: number; direction?: 'up' | 'down' | 'left' | 'right' };
+  }[]; // Tablica zdjęć
 }

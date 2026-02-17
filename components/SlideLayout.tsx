@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import logoImg from "../assets/logo.png";
 import { SlideContent, SlideType } from "../types";
+import { ArrowUp, ArrowDown, ArrowLeft, ArrowRight } from "lucide-react";
 
 interface SlideLayoutProps {
   data: SlideContent;
@@ -51,10 +52,12 @@ const SlideImage = ({
   url,
   caption,
   accentColor,
+  arrow,
 }: {
   url: string;
   caption?: string;
   accentColor: string;
+  arrow?: { x: number; y: number; direction?: "up" | "down" | "left" | "right" };
 }) => {
   const [src, setSrc] = useState(url);
 
@@ -67,6 +70,10 @@ const SlideImage = ({
       `https://placehold.co/400x700/1a1a1a/${accentColor.replace("#", "")}?text=${encodeURIComponent(caption || "Image Missing")}`,
     );
   };
+
+  const ArrowIcon = arrow?.direction === 'down' ? ArrowDown :
+                    arrow?.direction === 'left' ? ArrowLeft :
+                    arrow?.direction === 'right' ? ArrowRight : ArrowUp;
 
   return (
     <div className="group relative">
@@ -81,6 +88,20 @@ const SlideImage = ({
           onError={handleError}
           className="h-[45vh] w-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity"
         />
+        {arrow && (
+          <div 
+            className="absolute z-10 pointer-events-none animate-bounce"
+            style={{
+               left: `${arrow.x}%`,
+               top: `${arrow.y}%`,
+               color: accentColor,
+               transform: 'translate(-50%, -50%)',
+               filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.8))'
+            }}
+          >
+             <ArrowIcon size={64} strokeWidth={3} />
+          </div>
+        )}
         {caption && (
           <div className="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-sm p-4 border-t border-gray-800">
             <p className="text-center font-mono text-base md:text-xl text-gray-300 uppercase tracking-wider font-bold">
@@ -170,7 +191,7 @@ export const SlideLayout: React.FC<SlideLayoutProps> = ({ data, isActive }) => {
                 className="absolute top-0 left-0 bg-black text-white px-4 py-2 font-mono text-sm z-10 rounded-br-lg border-b border-r"
                 style={{ borderColor: accentColor }}
               >
-                LIVE ENVIRONMENT :: {data.contentUrl}
+                {data.contentUrl}
               </div>
               <iframe
                 src={data.contentUrl}
@@ -209,6 +230,7 @@ export const SlideLayout: React.FC<SlideLayoutProps> = ({ data, isActive }) => {
                     url={img.url}
                     caption={img.caption}
                     accentColor={accentColor}
+                    arrow={img.arrow}
                   />
                 </div>
               ))}

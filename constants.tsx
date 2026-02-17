@@ -29,6 +29,9 @@ import { SlideContent, SlideType } from './types';
 import authenticatorImg from './assets/authenticator.png';
 import smsImg from './assets/sms.png';
 import gpsImg from './assets/gps.png';
+import paczkaImg from './assets/paczka.png';
+import freeiphoneImg from './assets/freeiphone.png';
+import fakeigImg from './assets/fakeig.png';
 
 /**
  * ==========================================
@@ -183,41 +186,52 @@ export const SLIDES: SlideContent[] = [
   // SLAJD 9: SMS Przykład
   {
     id: 'ex-sms',
-    type: SlideType.WARNING,
+    type: SlideType.IMAGE,
     title: 'PRZYKŁAD 1',
     mainText: 'SMS "Dopłata do paczki"',
     icon: MessageSquareWarning,
-    accentColor: '#FF2A2A'
+    accentColor: '#FF2A2A',
+    images: [{ url: paczkaImg }]
   },
 
   // SLAJD 10: SMS Wyjaśnienie
   {
     id: 'ex-sms-expl',
-    type: SlideType.INFO,
+    type: SlideType.IMAGE,
     title: 'PRZYKŁAD 1',
     mainText: 'Wyjaśnienie',
     description: 'Analiza linków i nadawców wiadomości SMS.',
     icon: Info,
+    images: [{ 
+       url: paczkaImg, 
+       caption: 'Zwróć uwagę na link',
+       arrow: { x: 50, y: 60, direction: 'up' }
+    }]
   },
 
   // SLAJD 11: Instagram Przykład
   {
     id: 'ex-insta',
-    type: SlideType.WARNING,
+    type: SlideType.IMAGE,
     title: 'PRZYKŁAD 2',
     mainText: 'INSTAGRAM',
     icon: Instagram,
-    accentColor: '#FF2A2A'
+    accentColor: '#FF2A2A',
+    images: [{ url: freeiphoneImg }]
   },
 
   // SLAJD 12: Instagram Wyjaśnienie
   {
     id: 'ex-insta-expl',
-    type: SlideType.INFO,
+    type: SlideType.IMAGE,
     title: 'PRZYKŁAD 2',
     mainText: 'Wyjaśnienie',
     description: 'Podejrzane wiadomości bezpośrednie i prośby o głosy.',
     icon: Info,
+    images: [{ 
+      url: freeiphoneImg, 
+      caption: 'Wygląd' 
+    }]
   },
 
   // SLAJD 13: Mail z Banku
@@ -243,21 +257,27 @@ export const SLIDES: SlideContent[] = [
   // SLAJD 15: Fałszywy panel
   {
     id: 'ex-panel',
-    type: SlideType.WARNING,
+    type: SlideType.IMAGE,
     title: 'PRZYKŁAD 4',
     mainText: 'FAŁSZYWY PANEL LOGOWANIA',
     icon: LogIn,
-    accentColor: '#FF2A2A'
+    accentColor: '#FF2A2A',
+    images: [{ url: fakeigImg }]
   },
 
   // SLAJD 16: Fałszywy panel Wyjaśnienie
   {
     id: 'ex-panel-expl',
-    type: SlideType.INFO,
+    type: SlideType.IMAGE,
     title: 'PRZYKŁAD 4',
     mainText: 'Wyjaśnienie',
     description: 'Różnice w domenie i wyglądzie strony logowania.',
     icon: Info,
+    images: [{ 
+       url: fakeigImg, 
+       caption: 'Zwróć uwagę na URL',
+       arrow: { x: 50, y: 10, direction: 'up' }
+    }]
   },
 
   // === SOCJOTECHNIKA SEKCJA (NOWA) ===
