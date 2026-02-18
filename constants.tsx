@@ -262,7 +262,10 @@ export const SLIDES: SlideContent[] = [
     mainText: 'FAŁSZYWY PANEL LOGOWANIA',
     icon: LogIn,
     accentColor: '#FF2A2A',
-    images: [{ url: fakeigImg }]
+    images: [{ 
+      url: fakeigImg,
+      className: 'h-[75vh] max-w-none w-auto'
+    }]
   },
 
   // SLAJD 16: Fałszywy panel Wyjaśnienie
@@ -276,7 +279,7 @@ export const SLIDES: SlideContent[] = [
     images: [{ 
        url: fakeigImg, 
        caption: 'Zwróć uwagę na URL',
-       arrow: { x: 30, y: 10, direction: 'up' },
+       arrow: { x: 10, y: 6, direction: 'up' },
        className: 'h-[75vh] max-w-none w-auto'
     }]
   },
@@ -333,7 +336,10 @@ export const SLIDES: SlideContent[] = [
     description: 'Uważaj gdzie zamieszczasz kody QR.',
     icon: QrCode,
     accentColor: '#FF2A2A',
-    images: [{ url: osintImg }]
+    images: [{ 
+      url: osintImg,
+      className: 'h-[65vh] w-auto'
+    }]
   },
 
   // === ZAKOŃCZENIE ===
