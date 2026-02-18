@@ -24,5 +24,6 @@ export interface SlideContent {
     url: string; 
     caption?: string;
     arrow?: { x: number; y: number; direction?: 'up' | 'down' | 'left' | 'right' };
+    className?: string;
   }[]; // Tablica zdjęć
 }

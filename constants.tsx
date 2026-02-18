@@ -32,6 +32,7 @@ import gpsImg from './assets/gps.png';
 import paczkaImg from './assets/paczka.png';
 import freeiphoneImg from './assets/freeiphone.png';
 import fakeigImg from './assets/fakeig.png';
+import osintImg from './assets/osint.png';
 
 /**
  * ==========================================
@@ -200,7 +201,7 @@ export const SLIDES: SlideContent[] = [
     type: SlideType.IMAGE,
     title: 'PRZYKŁAD 1',
     mainText: 'Wyjaśnienie',
-    description: 'Analiza linków i nadawców wiadomości SMS.',
+    description: 'Weryfikuj linki i dokładnie je sprawdzaj.',
     icon: Info,
     images: [{ 
        url: paczkaImg, 
@@ -226,11 +227,10 @@ export const SLIDES: SlideContent[] = [
     type: SlideType.IMAGE,
     title: 'PRZYKŁAD 2',
     mainText: 'Wyjaśnienie',
-    description: 'Podejrzane wiadomości bezpośrednie i prośby o głosy.',
+    description: 'Zawsze weryfikuj profil.',
     icon: Info,
     images: [{ 
       url: freeiphoneImg, 
-      caption: 'Wygląd' 
     }]
   },
 
@@ -276,7 +276,8 @@ export const SLIDES: SlideContent[] = [
     images: [{ 
        url: fakeigImg, 
        caption: 'Zwróć uwagę na URL',
-       arrow: { x: 50, y: 10, direction: 'up' }
+       arrow: { x: 30, y: 10, direction: 'up' },
+       className: 'h-[75vh] max-w-none w-auto'
     }]
   },
 
@@ -326,12 +327,13 @@ export const SLIDES: SlideContent[] = [
   // SLAJD 21: OSINT QR
   {
     id: 'osint-qr',
-    type: SlideType.WARNING,
+    type: SlideType.IMAGE,
     title: 'OSINT',
-    mainText: 'Kody QR i etykiety paczek',
-    description: 'Imię, nazwisko, PESEL, data urodzenia widoczne na wyrzuconych paczkach.',
+    mainText: 'Kody QR',
+    description: 'Uważaj gdzie zamieszczasz kody QR.',
     icon: QrCode,
-    accentColor: '#FF2A2A'
+    accentColor: '#FF2A2A',
+    images: [{ url: osintImg }]
   },
 
   // === ZAKOŃCZENIE ===

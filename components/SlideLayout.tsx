@@ -53,11 +53,13 @@ const SlideImage = ({
   caption,
   accentColor,
   arrow,
+  className,
 }: {
   url: string;
   caption?: string;
   accentColor: string;
   arrow?: { x: number; y: number; direction?: "up" | "down" | "left" | "right" };
+  className?: string;
 }) => {
   const [src, setSrc] = useState(url);
 
@@ -86,7 +88,7 @@ const SlideImage = ({
           src={src}
           alt={caption}
           onError={handleError}
-          className="h-[45vh] w-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity"
+          className={`${className || "h-[45vh]"} w-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity`}
         />
         {arrow && (
           <div 
@@ -231,6 +233,7 @@ export const SlideLayout: React.FC<SlideLayoutProps> = ({ data, isActive }) => {
                     caption={img.caption}
                     accentColor={accentColor}
                     arrow={img.arrow}
+                    className={img.className}
                   />
                 </div>
               ))}
