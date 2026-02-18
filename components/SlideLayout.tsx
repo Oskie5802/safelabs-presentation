@@ -79,16 +79,15 @@ const SlideImage = ({
 
   return (
     <div className="group relative">
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none"></div>
       <div
-        className="relative overflow-hidden rounded-xl border-2 bg-safedark shadow-2xl transition-transform duration-300 hover:scale-[1.02]"
+        className="relative overflow-hidden rounded-xl border-2 bg-safedark shadow-2xl transition-transform duration-300"
         style={{ borderColor: `${accentColor}40` }}
       >
         <img
           src={src}
           alt={caption}
           onError={handleError}
-          className={`${className || "h-[45vh]"} w-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity`}
+          className={`${className || "h-[45vh]"} w-auto object-contain opacity-100 transition-opacity`}
         />
         {arrow && (
           <div 
@@ -105,7 +104,7 @@ const SlideImage = ({
           </div>
         )}
         {caption && (
-          <div className="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-sm p-4 border-t border-gray-800">
+          <div className="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-sm p-4 border-t border-gray-800 min-h-[5rem] flex items-center justify-center">
             <p className="text-center font-mono text-base md:text-xl text-gray-300 uppercase tracking-wider font-bold">
               {caption}
             </p>
@@ -225,7 +224,7 @@ export const SlideLayout: React.FC<SlideLayoutProps> = ({ data, isActive }) => {
               )}
             </div>
 
-            <div className="flex flex-wrap justify-center gap-10 w-full mt-2">
+            <div className="flex flex-wrap justify-center gap-10 w-full mt-2 items-end">
               {data.images?.map((img, idx) => (
                 <div key={idx} style={stagger(isActive, 300 + idx * 150, "up")}>
                   <SlideImage
@@ -243,6 +242,7 @@ export const SlideLayout: React.FC<SlideLayoutProps> = ({ data, isActive }) => {
 
       case SlideType.WARNING:
       case SlideType.INFO:
+      case SlideType.LIST:
       default:
         return (
           <div
@@ -299,6 +299,20 @@ export const SlideLayout: React.FC<SlideLayoutProps> = ({ data, isActive }) => {
                       </span>{" "}
                       {data.description}
                     </p>
+                  )}
+
+                  {data.bulletPoints && (
+                    <ul
+                      className="text-left space-y-6 mt-8 pl-4 md:pl-12"
+                      style={stagger(isActive, 600, "right")}
+                    >
+                      {data.bulletPoints.map((point, i) => (
+                        <li key={i} className="font-mono text-gray-300 text-2xl md:text-4xl flex items-start">
+                          <span style={{ color: accentColor }} className="mr-6 font-bold">•</span>
+                          {point}
+                        </li>
+                      ))}
+                    </ul>
                   )}
                 </div>
               </div>

@@ -33,6 +33,7 @@ import paczkaImg from './assets/paczka.png';
 import freeiphoneImg from './assets/freeiphone.png';
 import fakeigImg from './assets/fakeig.png';
 import osintImg from './assets/osint.png';
+import oszustwoBlikImg from './assets/oszustwo-blik.png';
 
 /**
  * ==========================================
@@ -49,7 +50,6 @@ export const SLIDES: SlideContent[] = [
     type: SlideType.TITLE,
     title: 'SAFE',
     subtitle: 'LABS',
-    description: 'Zarządzanie Tożsamością i Bezpieczeństwem',
     icon: ShieldCheck, 
   },
   
@@ -298,21 +298,31 @@ export const SLIDES: SlideContent[] = [
   // SLAJD 18: Socjotechnika - Na znajomego
   {
     id: 'socjo-friend',
-    type: SlideType.WARNING,
+    type: SlideType.IMAGE,
     title: 'SOCJOTECHNIKA',
     mainText: 'METODA "NA ZNAJOMEGO"',
     icon: MessageSquareWarning, // Zmieniono ikonę, żeby nie duplikować Users z tytułu sekcji
-    accentColor: '#FF2A2A'
+    accentColor: '#FF2A2A',
+    images: [{ 
+      url: oszustwoBlikImg,
+      className: 'h-[75vh] w-auto'
+    }]
   },
 
   // SLAJD 19: Socjotechnika - Ogólnie
   {
     id: 'socjo-gen',
-    type: SlideType.INFO,
-    title: 'SOCJOTECHNIKA',
-    mainText: 'Ogólnie',
-    description: 'Manipulacja psychologiczna w celu uzyskania informacji.',
+    type: SlideType.LIST,
+    title: 'INNE ATAKI',
+    mainText: 'PRZYKŁADY SOCJOTECHNIKI',
+    description: 'Różne formy manipulacji:',
     icon: BrainCircuit,
+    bulletPoints: [
+      'Metoda "na wnuczka" / "na policjanta"',
+      'Fałszywe telefony z banku',
+      'Znaleziony pendrive (Baiting)',
+      'Wchodzenie do budynku za pracownikiem'
+    ]
   },
 
   // === OSINT ===
