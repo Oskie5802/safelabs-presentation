@@ -34,6 +34,9 @@ import freeiphoneImg from './assets/freeiphone.png';
 import fakeigImg from './assets/fakeig.png';
 import osintImg from './assets/osint.png';
 import oszustwoBlikImg from './assets/oszustwo-blik.png';
+import appleKeychainImg from './assets/applekeychain.png';
+import mailImg from './assets/mail.png';
+import mailDetailsImg from './assets/maildetails.png';
 
 /**
  * ==========================================
@@ -89,6 +92,16 @@ export const SLIDES: SlideContent[] = [
     accentColor: '#FF2A2A'
   },
 
+  // SLAJD 5.5: Dlaczego takie zasady?
+  {
+    id: 'why-rules',
+    type: SlideType.TITLE,
+    title: 'DLACZEGO',
+    subtitle: 'TAKIE ZASADY?',
+    icon: Info,
+    accentColor: '#FF2A2A'
+  },
+
   // === SEKCJA LIVE DEMO ===
 
   // SLAJD 6: Live Demo (Tylko tytuł sekcji)
@@ -134,7 +147,7 @@ export const SLIDES: SlideContent[] = [
         caption: 'Google Password Manager' 
       },
       { 
-        url: 'https://placehold.co/400x700/1a1a1a/00F3FF?text=Apple+Keychain', 
+        url: appleKeychainImg, 
         caption: 'Apple iCloud Keychain' 
       }
     ]
@@ -234,24 +247,29 @@ export const SLIDES: SlideContent[] = [
     }]
   },
 
-  // SLAJD 13: Mail z Banku
+  // SLAJD 13: Fałszywe Maile
   {
     id: 'ex-bank',
-    type: SlideType.WARNING,
+    type: SlideType.IMAGE,
     title: 'PRZYKŁAD 3',
-    mainText: 'MAIL Z BANKU',
+    mainText: 'FAŁSZYWE MAILE',
     icon: MailWarning,
-    accentColor: '#FF2A2A'
+    accentColor: '#FF2A2A',
+    images: [{ url: mailImg }]
   },
 
-  // SLAJD 14: Mail z Banku Wyjaśnienie
+  // SLAJD 14: Fałszywe Maile Wyjaśnienie
   {
     id: 'ex-bank-expl',
-    type: SlideType.INFO,
+    type: SlideType.IMAGE,
     title: 'PRZYKŁAD 3',
     mainText: 'Wyjaśnienie',
     description: 'Spoofing adresu nadawcy i fałszywe linki logowania.',
     icon: Info,
+    images: [{ 
+      url: mailDetailsImg,
+      caption: 'Zwróć uwagę na szczegóły nadawcy'
+    }]
   },
 
   // SLAJD 15: Fałszywy panel
@@ -279,8 +297,9 @@ export const SLIDES: SlideContent[] = [
     images: [{ 
        url: fakeigImg, 
        caption: 'Zwróć uwagę na URL',
-       arrow: { x: 10, y: 6, direction: 'up' },
-       className: 'h-[75vh] max-w-none w-auto'
+       className: 'h-[75vh] max-w-none w-auto',
+       zoom: 7,
+       zoomOrigin: { x: 6, y: -4 }
     }]
   },
 
@@ -313,9 +332,8 @@ export const SLIDES: SlideContent[] = [
   {
     id: 'socjo-gen',
     type: SlideType.LIST,
-    title: 'INNE ATAKI',
-    mainText: 'PRZYKŁADY SOCJOTECHNIKI',
-    description: 'Różne formy manipulacji:',
+    title: 'A JAKIE SĄ INNE',
+    mainText: 'ATAKI SOCJOTECHNICZNE?',
     icon: BrainCircuit,
     bulletPoints: [
       'Metoda "na wnuczka" / "na policjanta"',

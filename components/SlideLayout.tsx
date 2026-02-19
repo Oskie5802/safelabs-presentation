@@ -54,18 +54,34 @@ const SlideImage = ({
   accentColor,
   arrow,
   className,
+  zoom,
+  zoomOrigin,
+  isActive,
 }: {
   url: string;
   caption?: string;
   accentColor: string;
   arrow?: { x: number; y: number; direction?: "up" | "down" | "left" | "right" };
   className?: string;
+  zoom?: boolean | number;
+  zoomOrigin?: { x: number; y: number };
+  isActive: boolean;
 }) => {
   const [src, setSrc] = useState(url);
+  const [shouldZoom, setShouldZoom] = useState(false);
 
   React.useEffect(() => {
     setSrc(url);
   }, [url]);
+
+  React.useEffect(() => {
+    if (isActive && zoom) {
+       const timeout = setTimeout(() => setShouldZoom(true), 1500);
+       return () => clearTimeout(timeout);
+    } else {
+       setShouldZoom(false);
+    }
+  }, [isActive, zoom]);
 
   const handleError = () => {
     setSrc(
@@ -77,34 +93,68 @@ const SlideImage = ({
                     arrow?.direction === 'left' ? ArrowLeft :
                     arrow?.direction === 'right' ? ArrowRight : ArrowUp;
 
+  const getTransformOrigin = () => {
+      if (zoomOrigin) {
+          return `${zoomOrigin.x}% ${zoomOrigin.y}%`;
+      }
+
+      if (!arrow) return 'center center';
+      let xOffset = '0px';
+      let yOffset = '0px';
+      
+      if (arrow.direction === 'up' || !arrow.direction) yOffset = '-50px';
+      if (arrow.direction === 'down') yOffset = '50px';
+      if (arrow.direction === 'left') xOffset = '-50px';
+      if (arrow.direction === 'right') xOffset = '50px';
+      
+      return `calc(${arrow.x}% + ${xOffset}) calc(${arrow.y}% + ${yOffset})`;
+  }
+
+  const transformOrigin = getTransformOrigin();
+  const scaleValue = typeof zoom === 'number' ? zoom : 2.5;
+  
+  const zoomStyle: React.CSSProperties = shouldZoom ? {
+      transformOrigin,
+      transform: `scale(${scaleValue})`, 
+      transition: 'transform 1.5s cubic-bezier(0.22, 1, 0.36, 1)'
+  } : {
+      transformOrigin,
+      transform: 'scale(1)',
+      transition: 'transform 1s ease-out'
+  };
+
   return (
     <div className="group relative">
       <div
         className="relative overflow-hidden rounded-xl border-2 bg-safedark shadow-2xl transition-transform duration-300"
         style={{ borderColor: `${accentColor}40` }}
       >
-        <img
-          src={src}
-          alt={caption}
-          onError={handleError}
-          className={`${className || "h-[45vh]"} w-auto object-contain opacity-100 transition-opacity`}
-        />
+        <div style={zoomStyle} className="relative">
+            <img
+            src={src}
+            alt={caption}
+            onError={handleError}
+            className={`${className || "h-[60vh]"} w-auto object-contain opacity-100 transition-opacity`}
+            />
+        </div>
+        
         {arrow && (
-          <div 
+        <div 
             className="absolute z-10 pointer-events-none animate-bounce"
             style={{
-               left: `${arrow.x}%`,
-               top: `${arrow.y}%`,
-               color: accentColor,
-               transform: 'translate(-50%, -50%)',
-               filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.8))'
+            left: `${arrow.x}%`,
+            top: `${arrow.y}%`,
+            color: accentColor,
+            transform: 'translate(-50%, -50%)',
+            filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.8))'
             }}
-          >
-             <ArrowIcon size={64} strokeWidth={3} />
-          </div>
+        >
+            <ArrowIcon size={64} strokeWidth={3} />
+        </div>
         )}
+
         {caption && (
-          <div className="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-sm p-4 border-t border-gray-800 min-h-[5rem] flex items-center justify-center">
+          <div className="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-sm p-4 border-t border-gray-800 min-h-[8rem] flex items-center justify-center z-20">
             <p className="text-center font-mono text-base md:text-xl text-gray-300 uppercase tracking-wider font-bold">
               {caption}
             </p>
@@ -233,6 +283,9 @@ export const SlideLayout: React.FC<SlideLayoutProps> = ({ data, isActive }) => {
                     accentColor={accentColor}
                     arrow={img.arrow}
                     className={img.className}
+                    zoom={img.zoom}
+                    zoomOrigin={img.zoomOrigin}
+                    isActive={isActive}
                   />
                 </div>
               ))}
