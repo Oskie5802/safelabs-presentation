@@ -332,15 +332,9 @@ export const SLIDES: SlideContent[] = [
   {
     id: 'socjo-gen',
     type: SlideType.LIST,
-    title: 'A JAKIE SĄ INNE',
-    mainText: 'ATAKI SOCJOTECHNICZNE?',
+    title: '',
+    mainText: 'INNE ATAKI SOCJOTECHNICZNE',
     icon: BrainCircuit,
-    bulletPoints: [
-      'Metoda "na wnuczka" / "na policjanta"',
-      'Fałszywe telefony z banku',
-      'Znaleziony pendrive (Baiting)',
-      'Wchodzenie do budynku za pracownikiem'
-    ]
   },
 
   // === OSINT ===
