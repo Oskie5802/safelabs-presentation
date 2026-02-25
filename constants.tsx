@@ -218,7 +218,10 @@ export const SLIDES: SlideContent[] = [
     mainText: 'INSTAGRAM',
     icon: Instagram,
     accentColor: '#FF2A2A',
-    images: [{ url: freeiphoneImg }]
+    images: [{ 
+      url: freeiphoneImg,
+      className: 'h-[75vh] w-auto'
+    }]
   },
 
   // SLAJD 12: Instagram Wyjaśnienie
@@ -231,6 +234,9 @@ export const SLIDES: SlideContent[] = [
     icon: Info,
     images: [{ 
       url: freeiphoneImg, 
+      caption: 'Zwróć uwagę na nazwę profilu',
+      arrow: { x: 25, y: 12, direction: 'up' },
+      className: 'h-[75vh] w-auto'
     }]
   },
 
