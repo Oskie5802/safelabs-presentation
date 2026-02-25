@@ -26,8 +26,30 @@ const App: React.FC = () => {
       }
     };
 
+    const handleMouseDown = (e: MouseEvent) => {
+      // button 0: Left click
+      // button 3: Backward side button
+      // button 4: Forward side button
+      if (e.button === 0 || e.button === 4) {
+        goToNextSlide();
+      } else if (e.button === 3) {
+        goToPrevSlide();
+      }
+    };
+
+    // Prevent browser navigation for mouse side buttons
+    const handleContextMenu = (e: MouseEvent) => {
+      // If we wanted to override right click (button 2), we'd do it here
+      // But for now we just handle side buttons which are handled by mousedown
+    };
+
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    window.addEventListener("mousedown", handleMouseDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("mousedown", handleMouseDown);
+    };
   }, [goToNextSlide, goToPrevSlide]);
 
   return (

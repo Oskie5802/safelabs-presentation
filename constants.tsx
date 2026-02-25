@@ -1,39 +1,42 @@
-import { 
-  ShieldCheck, 
-  LockKeyhole, 
-  Copy, 
-  UserRound, 
-  Keyboard,
-  Terminal,
-  KeyRound,
-  Smartphone,
-  MessageSquareWarning,
+import {
+  Banknote,
+  BrainCircuit,
+  Copy,
+  FishSymbol,
+  Flag,
+  Globe,
+  Image as ImageIcon,
   Info,
   Instagram,
-  MailWarning,
+  Keyboard,
+  KeyRound,
+  LockKeyhole,
   LogIn,
-  FishSymbol,
-  Users,
-  BrainCircuit,
-  Image as ImageIcon,
-  QrCode,
-  Siren,
+  MailWarning,
+  MessageSquareWarning,
   MousePointerClick,
+  QrCode,
+  ShieldCheck,
+  Siren,
+  Smartphone,
+  Terminal,
+  UserRound,
+  Users,
   UserX,
-  Banknote,
-  Flag,
-  Globe
-} from 'lucide-react';
-import { SlideContent, SlideType } from './types';
+} from "lucide-react";
+import { SlideContent, SlideType } from "./types";
 
-import authenticatorImg from './assets/authenticator.png';
-import smsImg from './assets/sms.png';
-import gpsImg from './assets/gps.png';
-import paczkaImg from './assets/paczka.png';
-import freeiphoneImg from './assets/freeiphone.png';
-import fakeigImg from './assets/fakeig.png';
-import osintImg from './assets/osint.png';
-import oszustwoBlikImg from './assets/oszustwo-blik.png';
+import appleKeychainImg from "./assets/applekeychain.png";
+import authenticatorImg from "./assets/authenticator.png";
+import fakeigImg from "./assets/fakeig.png";
+import freeiphoneImg from "./assets/freeiphone.png";
+import gpsImg from "./assets/gps.png";
+import mailImg from "./assets/mail.png";
+import mailDetailsImg from "./assets/maildetails.png";
+import osintImg from "./assets/osint.png";
+import oszustwoBlikImg from "./assets/oszustwo-blik.png";
+import paczkaImg from "./assets/paczka.png";
+import smsImg from "./assets/sms.png";
 
 /**
  * ==========================================
@@ -46,364 +49,396 @@ export const PRESENTATION_TITLE = "Bezpieczeństwo Haseł";
 export const SLIDES: SlideContent[] = [
   // SLAJD 1: Intro / Logo
   {
-    id: 'intro',
+    id: "intro",
     type: SlideType.TITLE,
-    title: 'SAFE',
-    subtitle: 'LABS',
-    icon: ShieldCheck, 
+    title: "SAFE",
+    subtitle: "LABS",
+    icon: ShieldCheck,
   },
-  
+
   // SLAJD 2: Krótkie hasła
   {
-    id: 'short-pass',
+    id: "short-pass",
     type: SlideType.WARNING,
-    mainText: 'Hasło krótsze niż 8 znaków.',
+    mainText: "Hasło krótsze niż 8 znaków.",
     icon: LockKeyhole,
-    accentColor: '#FF2A2A' // Cyber Red
+    accentColor: "#FF2A2A", // Cyber Red
   },
 
   // SLAJD 3: To samo hasło
   {
-    id: 'same-pass',
+    id: "same-pass",
     type: SlideType.WARNING,
-    mainText: 'To samo hasło do różnych portali.',
+    mainText: "To samo hasło do różnych portali.",
     icon: Copy,
-    accentColor: '#FF2A2A'
+    accentColor: "#FF2A2A",
   },
 
   // SLAJD 4: Dane osobowe
   {
-    id: 'personal-data',
+    id: "personal-data",
     type: SlideType.WARNING,
-    mainText: 'W haśle imię (swoje, psa, kota) lub data urodzenia.',
+    mainText: "W haśle imię (swoje, psa, kota) lub data urodzenia.",
     icon: UserRound,
-    accentColor: '#FF2A2A'
+    accentColor: "#FF2A2A",
   },
 
   // SLAJD 5: Znane schematy
   {
-    id: 'common-patterns',
+    id: "common-patterns",
     type: SlideType.WARNING,
     mainText: 'Znane hasła typu: "12345678", "zaq12wsx" albo "haslo123".',
     icon: Keyboard,
-    accentColor: '#FF2A2A'
+    accentColor: "#FF2A2A",
+  },
+
+  // SLAJD 5.5: Dlaczego takie zasady?
+  {
+    id: "why-rules",
+    type: SlideType.TITLE,
+    title: "DLACZEGO",
+    subtitle: "TAKIE ZASADY?",
+    icon: Info,
+    accentColor: "#FF2A2A",
   },
 
   // === SEKCJA LIVE DEMO ===
 
   // SLAJD 6: Live Demo (Tylko tytuł sekcji)
   {
-    id: 'live-demo',
+    id: "live-demo",
     type: SlideType.TITLE,
-    title: 'LIVE DEMO',
-    subtitle: 'ŁAMANIE HASEŁ',
+    title: "LIVE DEMO",
+    subtitle: "ŁAMANIE HASEŁ",
     icon: Terminal,
-    accentColor: '#00F3FF'
+    accentColor: "#00F3FF",
   },
 
   // SLAJD 6.5: Osadzona strona (Iframe)
   {
-    id: 'live-demo-web',
+    id: "live-demo-web",
     type: SlideType.IFRAME,
-    contentUrl: 'https://safelabs.pl/sprawdz-haslo',
+    contentUrl: "https://safelabs.pl/sprawdz-haslo",
     icon: Globe,
   },
 
   // === PRZEJŚCIE: JAK ZAPAMIĘTAĆ ===
   {
-    id: 'how-to-remember',
+    id: "how-to-remember",
     type: SlideType.TITLE,
-    title: 'JAK ZAPAMIĘTAĆ',
-    subtitle: 'TAKIE DŁUGIE HASŁO?',
+    title: "JAK ZAPAMIĘTAĆ",
+    subtitle: "TAKIE DŁUGIE HASŁO?",
     icon: BrainCircuit,
-    accentColor: '#00F3FF'
+    accentColor: "#00F3FF",
   },
 
   // SLAJD 7: Password Manager (Zdjęcia)
   {
-    id: 'pass-manager',
+    id: "pass-manager",
     type: SlideType.IMAGE,
-    title: 'ROZWIĄZANIE',
-    mainText: 'PASSWORD MANAGER',
-    description: 'Używaj wbudowanych menedżerów haseł.',
+    title: "ROZWIĄZANIE",
+    mainText: "PASSWORD MANAGER",
+    description: "Używaj wbudowanych menedżerów haseł.",
     icon: KeyRound,
-    accentColor: '#00FF41',
+    accentColor: "#00FF41",
     images: [
-      { 
-        url: gpsImg, 
-        caption: 'Google Password Manager' 
+      {
+        url: gpsImg,
+        caption: "Google Password Manager",
       },
-      { 
-        url: 'https://placehold.co/400x700/1a1a1a/00F3FF?text=Apple+Keychain', 
-        caption: 'Apple iCloud Keychain' 
-      }
-    ]
+      {
+        url: appleKeychainImg,
+        caption: "Apple iCloud Keychain",
+      },
+    ],
   },
 
   // === PRZEJŚCIE: DODATKOWA OCHRONA ===
   {
-    id: 'extra-protection',
+    id: "extra-protection",
     type: SlideType.TITLE,
-    title: 'DODATKOWA',
-    subtitle: 'WARSTWA OCHRONY',
+    title: "DODATKOWA",
+    subtitle: "WARSTWA OCHRONY",
     icon: ShieldCheck,
-    accentColor: '#00FF41'
+    accentColor: "#00FF41",
   },
 
   // SLAJD 8: Weryfikacja dwuetapowa (Zdjęcia)
   {
-    id: '2fa',
+    id: "2fa",
     type: SlideType.IMAGE,
-    title: 'BEZPIECZEŃSTWO',
-    mainText: 'WERYFIKACJA DWUETAPOWA',
-    description: 'Zawsze włączaj 2FA gdzie to możliwe.',
+    title: "BEZPIECZEŃSTWO",
+    mainText: "WERYFIKACJA DWUETAPOWA",
+    description: "Zawsze włączaj 2FA gdzie to możliwe.",
     icon: Smartphone,
-    accentColor: '#00FF41',
+    accentColor: "#00FF41",
     images: [
-      { 
-        url: authenticatorImg, 
-        caption: 'Aplikacja Authenticator' 
+      {
+        url: authenticatorImg,
+        caption: "Aplikacja Authenticator",
       },
-      { 
-        url: smsImg, 
-        caption: 'Kod SMS' 
-      }
-    ]
+      {
+        url: smsImg,
+        caption: "Kod SMS",
+      },
+    ],
   },
 
   // === SEKCJA PHISHING (Zaktualizowana) ===
   {
-    id: 'phishing-section',
+    id: "phishing-section",
     type: SlideType.TITLE,
-    title: 'PHISHING',
-    subtitle: 'JAK TO DZIAŁA?',
-    description: 'Wyjaśnienie mechanizmu wyłudzania danych.',
-    icon: FishSymbol, 
-    accentColor: '#00F3FF'
+    title: "PHISHING",
+    subtitle: "JAK TO DZIAŁA?",
+    description: "Wyjaśnienie mechanizmu wyłudzania danych.",
+    icon: FishSymbol,
+    accentColor: "#00F3FF",
   },
 
   // === PRZYKŁADY ===
 
   // SLAJD 9: SMS Przykład
   {
-    id: 'ex-sms',
+    id: "ex-sms",
     type: SlideType.IMAGE,
-    title: 'PRZYKŁAD 1',
+    title: "PRZYKŁAD 1",
     mainText: 'SMS "Dopłata do paczki"',
     icon: MessageSquareWarning,
-    accentColor: '#FF2A2A',
-    images: [{ url: paczkaImg }]
+    accentColor: "#FF2A2A",
+    images: [{ url: paczkaImg }],
   },
 
   // SLAJD 10: SMS Wyjaśnienie
   {
-    id: 'ex-sms-expl',
+    id: "ex-sms-expl",
     type: SlideType.IMAGE,
-    title: 'PRZYKŁAD 1',
-    mainText: 'Wyjaśnienie',
-    description: 'Weryfikuj linki i dokładnie je sprawdzaj.',
+    title: "PRZYKŁAD 1",
+    mainText: "Wyjaśnienie",
+    description: "Weryfikuj linki i dokładnie je sprawdzaj.",
     icon: Info,
-    images: [{ 
-       url: paczkaImg, 
-       caption: 'Zwróć uwagę na link',
-       arrow: { x: 50, y: 60, direction: 'up' }
-    }]
+    images: [
+      {
+        url: paczkaImg,
+        caption: "Zwróć uwagę na link",
+        arrow: { x: 50, y: 60, direction: "up" },
+      },
+    ],
   },
 
   // SLAJD 11: Instagram Przykład
   {
-    id: 'ex-insta',
+    id: "ex-insta",
     type: SlideType.IMAGE,
-    title: 'PRZYKŁAD 2',
-    mainText: 'INSTAGRAM',
+    title: "PRZYKŁAD 2",
+    mainText: "INSTAGRAM",
     icon: Instagram,
     accentColor: '#FF2A2A',
-    images: [{ 
-      url: freeiphoneImg,
-      className: 'h-[75vh] w-auto'
-    }]
+    images: [{ url: freeiphoneImg }]
   },
 
   // SLAJD 12: Instagram Wyjaśnienie
   {
-    id: 'ex-insta-expl',
+    id: "ex-insta-expl",
     type: SlideType.IMAGE,
-    title: 'PRZYKŁAD 2',
-    mainText: 'Wyjaśnienie',
-    description: 'Zawsze weryfikuj profil.',
+    title: "PRZYKŁAD 2",
+    mainText: "Wyjaśnienie",
+    description: "Zawsze weryfikuj profil.",
     icon: Info,
     images: [{ 
       url: freeiphoneImg, 
-      caption: 'Zwróć uwagę na nazwę profilu',
-      arrow: { x: 25, y: 12, direction: 'up' },
-      className: 'h-[75vh] w-auto'
     }]
   },
 
-  // SLAJD 13: Mail z Banku
+  // SLAJD 13: Fałszywe Maile
   {
-    id: 'ex-bank',
-    type: SlideType.WARNING,
-    title: 'PRZYKŁAD 3',
-    mainText: 'MAIL Z BANKU',
+    id: "ex-bank",
+    type: SlideType.IMAGE,
+    title: "PRZYKŁAD 3",
+    mainText: "FAŁSZYWE MAILE",
     icon: MailWarning,
-    accentColor: '#FF2A2A'
+    accentColor: "#FF2A2A",
+    images: [{ url: mailImg }],
   },
 
-  // SLAJD 14: Mail z Banku Wyjaśnienie
+  // SLAJD 14: Fałszywe Maile Wyjaśnienie
   {
-    id: 'ex-bank-expl',
-    type: SlideType.INFO,
-    title: 'PRZYKŁAD 3',
-    mainText: 'Wyjaśnienie',
-    description: 'Spoofing adresu nadawcy i fałszywe linki logowania.',
+    id: "ex-bank-expl",
+    type: SlideType.IMAGE,
+    title: "PRZYKŁAD 3",
+    mainText: "Wyjaśnienie",
+    description: "Spoofing adresu nadawcy i fałszywe linki logowania.",
     icon: Info,
+    images: [
+      {
+        url: mailDetailsImg,
+        caption: "Zwróć uwagę na szczegóły nadawcy",
+      },
+    ],
   },
 
   // SLAJD 15: Fałszywy panel
   {
-    id: 'ex-panel',
+    id: "ex-panel",
     type: SlideType.IMAGE,
-    title: 'PRZYKŁAD 4',
-    mainText: 'FAŁSZYWY PANEL LOGOWANIA',
+    title: "PRZYKŁAD 4",
+    mainText: "FAŁSZYWY PANEL LOGOWANIA",
     icon: LogIn,
-    accentColor: '#FF2A2A',
-    images: [{ 
-      url: fakeigImg,
-      className: 'h-[75vh] max-w-none w-auto'
-    }]
+    accentColor: "#FF2A2A",
+    images: [
+      {
+        url: fakeigImg,
+        className: "h-[75vh] max-w-none w-auto",
+      },
+    ],
   },
 
   // SLAJD 16: Fałszywy panel Wyjaśnienie
   {
-    id: 'ex-panel-expl',
+    id: "ex-panel-expl",
     type: SlideType.IMAGE,
-    title: 'PRZYKŁAD 4',
-    mainText: 'Wyjaśnienie',
-    description: 'Różnice w domenie i wyglądzie strony logowania.',
+    title: "PRZYKŁAD 4",
+    mainText: "Wyjaśnienie",
+    description: "Różnice w domenie i wyglądzie strony logowania.",
     icon: Info,
-    images: [{ 
-       url: fakeigImg, 
-       caption: 'Zwróć uwagę na URL',
-       arrow: { x: 10, y: 6, direction: 'up' },
-       className: 'h-[75vh] max-w-none w-auto'
-    }]
+    images: [
+      {
+        url: fakeigImg,
+        caption: "Zwróć uwagę na URL",
+        className: "h-[75vh] max-w-none w-auto",
+        zoom: 7,
+        zoomOrigin: { x: 6, y: -4 },
+      },
+    ],
   },
 
   // === SOCJOTECHNIKA SEKCJA (NOWA) ===
 
   {
-    id: 'socjo-section',
+    id: "socjo-section",
     type: SlideType.TITLE,
-    title: 'SOCJOTECHNIKA',
-    subtitle: 'HAKOWANIE LUDZI',
+    title: "SOCJOTECHNIKA",
+    subtitle: "HAKOWANIE LUDZI",
     icon: Users,
-    accentColor: '#FF2A2A'
+    accentColor: "#FF2A2A",
   },
 
   // SLAJD 18: Socjotechnika - Na znajomego
   {
-    id: 'socjo-friend',
+    id: "socjo-friend",
     type: SlideType.IMAGE,
-    title: 'SOCJOTECHNIKA',
+    title: "SOCJOTECHNIKA",
     mainText: 'METODA "NA ZNAJOMEGO"',
     icon: MessageSquareWarning, // Zmieniono ikonę, żeby nie duplikować Users z tytułu sekcji
-    accentColor: '#FF2A2A',
-    images: [{ 
-      url: oszustwoBlikImg,
-      className: 'h-[75vh] w-auto'
-    }]
+    accentColor: "#FF2A2A",
+    images: [
+      {
+        url: oszustwoBlikImg,
+        className: "h-[75vh] w-auto",
+      },
+    ],
   },
 
   // SLAJD 19: Socjotechnika - Ogólnie
   {
-    id: 'socjo-gen',
+    id: "socjo-gen",
     type: SlideType.LIST,
-    title: 'INNE ATAKI',
-    mainText: 'PRZYKŁADY SOCJOTECHNIKI',
-    description: 'Różne formy manipulacji:',
+    title: "",
+    mainText: "INNE ATAKI SOCJOTECHNICZNE",
     icon: BrainCircuit,
-    bulletPoints: [
-      'Metoda "na wnuczka" / "na policjanta"',
-      'Fałszywe telefony z banku',
-      'Znaleziony pendrive (Baiting)',
-      'Wchodzenie do budynku za pracownikiem'
-    ]
   },
 
   // === OSINT ===
 
   // SLAJD 20: OSINT (Tytuł sekcji)
   {
-    id: 'osint-section',
+    id: "osint-section",
     type: SlideType.TITLE,
-    title: 'OSINT',
-    subtitle: 'CZYLI ILE MOŻNA WYCZYTAĆ ZE ZDJĘCIA',
+    title: "OSINT",
+    subtitle: "CZYLI ILE MOŻNA WYCZYTAĆ ZE ZDJĘCIA",
     icon: ImageIcon,
-    accentColor: '#00F3FF'
+    accentColor: "#00F3FF",
   },
 
   // SLAJD 21: OSINT QR
   {
-    id: 'osint-qr',
+    id: "osint-qr",
     type: SlideType.IMAGE,
-    title: 'OSINT',
-    mainText: 'Kody QR',
-    description: 'Uważaj gdzie zamieszczasz kody QR.',
+    title: "OSINT",
+    mainText: "Kody QR",
+    description: "Uważaj gdzie zamieszczasz kody QR.",
     icon: QrCode,
-    accentColor: '#FF2A2A',
-    images: [{ 
-      url: osintImg,
-      className: 'h-[65vh] w-auto'
-    }]
+    accentColor: "#FF2A2A",
+    images: [
+      {
+        url: osintImg,
+        className: "h-[65vh] w-auto",
+      },
+    ],
   },
 
   // === ZAKOŃCZENIE ===
 
   // SLAJD 22: Co robić jak jest przypał
   {
-    id: 'what-now',
+    id: "what-now",
     type: SlideType.TITLE,
-    title: 'CO ROBIĆ',
-    subtitle: 'JAK JEST PRZYPAŁ?',
-    icon: Siren, 
-    accentColor: '#FF2A2A'
+    title: "CO ROBIĆ",
+    subtitle: "JAK JEST PRZYPAŁ?",
+    icon: Siren,
+    accentColor: "#FF2A2A",
   },
 
   // SLAJD 23: Kliknąłem w link
   {
-    id: 'case-clicked',
+    id: "case-clicked",
     type: SlideType.INFO,
-    mainText: 'Kliknąłem w link i podałem hasło.',
+    mainText: "Kliknąłem w link i podałem hasło.",
     icon: MousePointerClick,
-    accentColor: '#00F3FF'
+    accentColor: "#00F3FF",
   },
 
   // SLAJD 24: Kradzież konta
   {
-    id: 'case-stolen',
+    id: "case-stolen",
     type: SlideType.INFO,
-    mainText: 'Ktoś ukradł mi konto na FB/Insta.',
+    mainText: "Ktoś ukradł mi konto na FB/Insta.",
     icon: UserX,
-    accentColor: '#00F3FF'
+    accentColor: "#00F3FF",
   },
 
   // SLAJD 25: Kod Blik
   {
-    id: 'case-blik',
+    id: "case-blik",
     type: SlideType.INFO,
-    mainText: 'Wysłałem kod BLIK.',
+    mainText: "Wysłałem kod BLIK.",
     icon: Banknote,
-    accentColor: '#00F3FF'
+    accentColor: "#00F3FF",
   },
 
-  // SLAJD 26: Zakończenie
+  // SLAJD 26: Podsumowanie
   {
-    id: 'end',
+    id: "summary",
+    type: SlideType.LIST,
+    mainText: "PODSUMOWANIE",
+    bulletPoints: [
+      "Różne hasła do każdego serwisu",
+      "Menedżer haseł",
+      "Weryfikacja dwuetapowa (2FA)",
+      "Sprawdzanie URL i adresów e-mail",
+      "Potwierdzaj prośby o pieniądze telefonicznie",
+      "Nie wysyłaj zdjęć z ważnymi kodami QR",
+    ],
+    icon: ShieldCheck,
+    accentColor: "#00FF41",
+  },
+
+  // SLAJD 27: Zakończenie
+  {
+    id: "end",
     type: SlideType.TITLE,
-    title: 'ZAKOŃCZENIE',
-    description: 'Dziękujemy za uwagę.',
+    title: "ZAKOŃCZENIE",
+    description: "Dziękujemy za uwagę.",
     icon: Flag,
-    accentColor: '#00FF41'
+    accentColor: "#00FF41",
   },
 ];

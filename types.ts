@@ -25,5 +25,7 @@ export interface SlideContent {
     caption?: string;
     arrow?: { x: number; y: number; direction?: 'up' | 'down' | 'left' | 'right' };
     className?: string;
+    zoom?: boolean | number;
+    zoomOrigin?: { x: number; y: number };
   }[]; // Tablica zdjęć
 }
