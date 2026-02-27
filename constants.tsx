@@ -186,10 +186,12 @@ export const SLIDES: SlideContent[] = [
       {
         url: authenticatorImg,
         caption: "Aplikacja Authenticator",
+        className: "h-[70vh] w-auto",
       },
       {
         url: smsImg,
         caption: "Kod SMS",
+        className: "h-[70vh] w-auto",
       },
     ],
   },
@@ -215,7 +217,7 @@ export const SLIDES: SlideContent[] = [
     mainText: 'SMS "Dopłata do paczki"',
     icon: MessageSquareWarning,
     accentColor: "#FF2A2A",
-    images: [{ url: paczkaImg }],
+    images: [{ url: paczkaImg, className: "w-[55vw] h-auto" }],
   },
 
   // SLAJD 10: SMS Wyjaśnienie
@@ -230,7 +232,8 @@ export const SLIDES: SlideContent[] = [
       {
         url: paczkaImg,
         caption: "Zwróć uwagę na link",
-        arrow: { x: 50, y: 60, direction: "up" },
+        className: "w-[55vw] h-auto",
+        arrow: { x: 50, y: 57, direction: "up" },
       },
     ],
   },
@@ -243,7 +246,7 @@ export const SLIDES: SlideContent[] = [
     mainText: "INSTAGRAM",
     icon: Instagram,
     accentColor: "#FF2A2A",
-    images: [{ url: freeiphoneImg }],
+    images: [{ url: freeiphoneImg, className: "w-[55vw] h-auto" }],
   },
 
   // SLAJD 12: Instagram Wyjaśnienie
@@ -257,6 +260,9 @@ export const SLIDES: SlideContent[] = [
     images: [
       {
         url: freeiphoneImg,
+        className: "w-[55vw] h-auto",
+        arrow: { x: 48, y: 29, direction: "up" },
+        caption: "Zwróć uwagę na nazwę użytkownika",
       },
     ],
   },
@@ -427,11 +433,21 @@ export const SLIDES: SlideContent[] = [
     accentColor: "#00F3FF",
   },
 
-  // SLAJD 26: Podsumowanie
+  // SLAJD 25.5: Podsumowanie (Tytuł sekcji)
+  {
+    id: "summary-section",
+    type: SlideType.TITLE,
+    title: "PODSUMOWANIE",
+    subtitle: "CZEGO SIĘ NAUCZYLIŚMY",
+    icon: ShieldCheck,
+    accentColor: "#00FF41",
+  },
+
+  // SLAJD 26: Podsumowanie (Powtórka)
   {
     id: "summary",
     type: SlideType.LIST,
-    mainText: "PODSUMOWANIE",
+    mainText: "POWTÓRKA",
     bulletPoints: [
       "Różne hasła do każdego serwisu",
       "Menedżer haseł",

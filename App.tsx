@@ -20,11 +20,18 @@ const App: React.FC = () => {
   // Keyboard Event Listener
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (blockNavigation && (e.key === "ArrowRight" || e.key === "Space")) {
+      // Obchodzimy animację tylko strzałką w dół, kiedy jesteśmy na zablokowanym slajdzie (bruteforce)
+      if (blockNavigation && e.key === "ArrowDown") {
         window.dispatchEvent(new CustomEvent("slide-step"));
         return;
       }
 
+      // Blokujemy przejście dalej jeśli animacja nie jest zakończona
+      if (blockNavigation && (e.key === "ArrowRight" || e.key === "Space")) {
+        return;
+      }
+
+      // Globalna nawigacja
       if (e.key === "ArrowRight" || e.key === "Space") {
         goToNextSlide();
       } else if (e.key === "ArrowLeft") {
@@ -51,7 +58,7 @@ const App: React.FC = () => {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [goToNextSlide, goToPrevSlide]);
+  }, [goToNextSlide, goToPrevSlide, blockNavigation]);
 
   return (
     <main className="relative w-screen h-screen bg-safeblack overflow-hidden flex items-center justify-center text-white selection:bg-safecyan selection:text-black">
@@ -76,7 +83,9 @@ const App: React.FC = () => {
             key={slide.id}
             data={slide}
             isActive={index === currentSlideIndex}
-            setBlockNavigation={index === currentSlideIndex ? setBlockNavigation : undefined}
+            setBlockNavigation={
+              index === currentSlideIndex ? setBlockNavigation : undefined
+            }
           />
         ))}
       </div>

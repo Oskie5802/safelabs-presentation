@@ -138,7 +138,7 @@ const SlideImage = ({
   return (
     <div className="group relative">
       <div
-        className="relative overflow-hidden rounded-xl border-2 bg-safedark shadow-2xl transition-transform duration-300"
+        className="relative overflow-hidden rounded-xl border-2 shadow-2xl transition-transform duration-300"
         style={{ borderColor: `${accentColor}40` }}
       >
         <div style={zoomStyle} className="relative">
@@ -146,7 +146,7 @@ const SlideImage = ({
             src={src}
             alt={caption}
             onError={handleError}
-            className={`${className || "h-[60vh]"} w-auto object-contain opacity-100 transition-opacity`}
+            className={`${className || "max-h-[65vh]"} w-auto object-contain opacity-100 transition-opacity`}
           />
         </div>
 
@@ -158,10 +158,10 @@ const SlideImage = ({
               top: `${arrow.y}%`,
               color: accentColor,
               transform: "translate(-50%, -50%)",
-              filter: "drop-shadow(0 0 10px rgba(0,0,0,0.8))",
+              filter: "drop-shadow(0 0 15px rgba(0,0,0,0.9))",
             }}
           >
-            <ArrowIcon size={64} strokeWidth={3} />
+            <ArrowIcon size={110} strokeWidth={4} />
           </div>
         )}
 
@@ -213,7 +213,18 @@ const LiveDemoContent = ({
   }, [isActive, setBlockNavigation]);
 
   const startCracking = () => {
-    if (isCracking || cracked) return;
+    if (isCracking || cracked) {
+      // If already cracked and view is success, the NEXT right arrow should unblock navigation and move to the next slide.
+      // But App.tsx handles ArrowRight. We only get slide-step if blockNavigation is true.
+      if (cracked && viewState === "success") {
+        setBlockNavigation?.(false);
+        // We need to trigger the next slide manually since we intercepted it.
+        // Wait, if we setBlockNavigation(false), the next slide arrow will work.
+        // Or we can programmatically go to next slide here.
+        // Wait, it's better to unblock navigation once "success" state is reached, so the user can just press right arrow to advance!
+      }
+      return;
+    }
 
     // Step 1: Start cracking logic
     setIsCracking(true);
@@ -225,9 +236,6 @@ const LiveDemoContent = ({
 
     // Step 2: Move camera to terminal
     setViewState("terminal");
-
-    // Unblock navigation after starting attack
-    setBlockNavigation?.(false);
   };
 
   // Listen for custom event from App.tsx
@@ -240,7 +248,7 @@ const LiveDemoContent = ({
 
     window.addEventListener("slide-step", handleSlideStep);
     return () => window.removeEventListener("slide-step", handleSlideStep);
-  }, [isActive, isCracking, cracked, setBlockNavigation]);
+  }, [isActive, isCracking, cracked, viewState, setBlockNavigation]);
 
   React.useEffect(() => {
     if (!isCracking) return;
@@ -282,6 +290,37 @@ const LiveDemoContent = ({
       "binker",
       "liverpool",
       "arsenal",
+      "pancakes",
+      "dinosaur",
+      "pikachu",
+      "pokemon",
+      "snoopy",
+      "1234567890",
+      "iloveyou",
+      "mustang",
+      "hannah",
+      "jessica",
+      "ashley",
+      "daniel",
+      "andrew",
+      "admin",
+      "qazwsx",
+      "zaq123",
+      "haslo",
+      "haslo123",
+      "wiosna2024",
+      "lato2024",
+      "jesien2024",
+      "zima2024",
+      "polska",
+      "krakow",
+      "warszawa",
+      "wroclaw",
+      "buziaczek",
+      "kotek",
+      "piesek",
+      "misio",
+      "sloneczko",
     ];
 
     const interval = setInterval(() => {
@@ -289,16 +328,16 @@ const LiveDemoContent = ({
         commonPasswords[Math.floor(Math.random() * commonPasswords.length)];
       setLogs((prev) => {
         const newLogs = [...prev, `> Checking: ${randomPass} [FAILED]`];
-        if (newLogs.length > 18) return newLogs.slice(newLogs.length - 18);
+        if (newLogs.length > 25) return newLogs.slice(newLogs.length - 25);
         return newLogs;
       });
-    }, 40);
+    }, 30);
 
     const timeout = setTimeout(() => {
       clearInterval(interval);
       setIsCracking(false);
       setCracked(true);
-      const finalPass = "zaq12wsx";
+      const finalPass = "oskar123";
       setLogs((prev) => [
         ...prev,
         `> Checking: ${finalPass} [SUCCESS]`,
@@ -306,11 +345,13 @@ const LiveDemoContent = ({
       ]);
       setPassword(finalPass);
 
-      // Step 3: Move camera back to panel after 1s delay
+      // Step 3: Move camera back to panel after 3s delay
       setTimeout(() => {
         setViewState("success");
-      }, 1000);
-    }, 4000);
+        // Navigation is unblocked so next right arrow proceeds to next slide
+        setBlockNavigation?.(false);
+      }, 3000);
+    }, 7000); // Increased cracking time from 4s to 7s
 
     return () => {
       clearInterval(interval);
@@ -318,139 +359,135 @@ const LiveDemoContent = ({
     };
   }, [isCracking]);
 
-  // Calculate transforms based on viewState
-  // Smooth translation without zoom
-  const getContainerStyle = () => {
-    const baseStyle = {
-      transition: "transform 1.2s cubic-bezier(0.22, 1, 0.36, 1)",
-    };
-
-    if (viewState === "panel") {
-      // Move down to center the panel
-      return { ...baseStyle, transform: "translateY(15vh)" };
-    }
-    if (viewState === "terminal") {
-      // Move up to center the terminal
-      return { ...baseStyle, transform: "translateY(-15vh)" };
-    }
-    if (viewState === "success") {
-      // Center everything
-      return { ...baseStyle, transform: "translateY(0)" };
-    }
-    return baseStyle;
-  };
-
   return (
-    <div className="w-full h-full flex items-center justify-center overflow-hidden">
+    <div className="w-full h-[80vh] relative flex items-center justify-center overflow-visible perspective-[1000px]">
+      {/* Login Panel */}
       <div
-        className="w-full max-w-5xl flex flex-col items-center gap-12"
-        style={getContainerStyle()}
+        className={`absolute w-full max-w-2xl bg-white rounded-xl shadow-2xl overflow-hidden transition-all duration-[1200ms] ease-in-out border-2 z-20
+          ${
+            viewState === "panel"
+              ? "shadow-[0_0_60px_rgba(255,255,255,0.4)] border-blue-400 scale-100 translate-y-0 opacity-100"
+              : viewState === "terminal"
+                ? "opacity-30 border-gray-200 scale-[0.6] -translate-y-[80%] blur-[4px] grayscale-[0.8]"
+                : "shadow-[0_0_80px_rgba(0,255,0,0.5)] border-green-500 scale-110 translate-y-0 opacity-100 z-30"
+          }
+        `}
       >
-        {/* Login Panel - Larger for TV */}
-        <div
-          className={`w-full max-w-2xl bg-white rounded-xl shadow-2xl overflow-hidden transition-all duration-700 border-2 ${viewState === "panel" ? "shadow-[0_0_60px_rgba(255,255,255,0.4)] border-blue-400 scale-105" : "opacity-60 border-gray-200 scale-100 grayscale-[0.5]"}`}
-        >
-          <div className="bg-gray-100 px-8 py-6 border-b border-gray-200 flex justify-between items-center">
-            <span className="font-bold text-gray-700 text-2xl">
-              Panel Logowania
-            </span>
-            <div className="flex gap-3">
-              <div className="w-4 h-4 rounded-full bg-red-400"></div>
-              <div className="w-4 h-4 rounded-full bg-yellow-400"></div>
-              <div className="w-4 h-4 rounded-full bg-green-400"></div>
-            </div>
-          </div>
-          <div className="p-10 flex flex-col gap-8 relative">
-            {cracked && viewState === "success" && (
-              <div className="absolute inset-x-0 inset-y-0 z-20 flex items-center justify-center bg-white/40 backdrop-blur-[2px] rounded-b-xl border-t-0 p-8 transition-all duration-500">
-                <div className="bg-green-100 border-2 border-green-500 text-green-800 px-8 py-6 rounded-xl font-bold text-3xl text-center shadow-2xl w-full animate-scale-in">
-                  Zalogowano pomyślnie
-                </div>
-              </div>
-            )}
-            <div>
-              <label className="block text-gray-600 text-xl font-bold mb-3">
-                Email
-              </label>
-              <input
-                type="email"
-                value={data.mainText}
-                readOnly
-                className="w-full border-2 border-gray-300 rounded-lg p-4 text-2xl text-gray-800 bg-gray-50 focus:outline-none font-medium"
-              />
-            </div>
-            <div>
-              <label className="block text-gray-600 text-xl font-bold mb-3">
-                Hasło
-              </label>
-              <input
-                type="password"
-                value={password}
-                readOnly
-                className={`w-full border-2 rounded-lg p-4 text-2xl text-gray-800 focus:outline-none transition-colors duration-300 ${cracked ? "border-green-500 bg-green-50 text-green-700 font-bold" : "border-gray-300"}`}
-                placeholder={isCracking ? "Łamanie hasła..." : "••••••••"}
-              />
-            </div>
-            <button
-              onClick={startCracking}
-              disabled={isCracking || cracked}
-              className={`mt-4 w-full font-bold py-4 px-6 rounded-lg text-xl tracking-wide transition-all duration-300 shadow-lg ${
-                isCracking
-                  ? "bg-gray-400 cursor-not-allowed text-white"
-                  : cracked
-                    ? "bg-blue-600 opacity-50 cursor-not-allowed text-white"
-                    : "bg-blue-600 hover:bg-blue-700 text-white"
-              }`}
-            >
-              {isCracking ? "PRZEPROWADZANIE ATAKU..." : "ZALOGUJ SIĘ"}
-            </button>
+        <div className="bg-gray-100 px-8 py-6 border-b border-gray-200 flex justify-between items-center">
+          <span className="font-bold text-gray-700 text-2xl">
+            Panel Logowania
+          </span>
+          <div className="flex gap-3">
+            <div className="w-4 h-4 rounded-full bg-red-400"></div>
+            <div className="w-4 h-4 rounded-full bg-yellow-400"></div>
+            <div className="w-4 h-4 rounded-full bg-green-400"></div>
           </div>
         </div>
-
-        {/* Attacker Terminal - Larger font */}
-        <div
-          className={`w-full bg-black rounded-xl border-2 font-mono text-lg p-6 shadow-2xl relative overflow-hidden min-h-[400px] transition-all duration-700 ${viewState === "terminal" ? "shadow-[0_0_80px_rgba(0,255,0,0.3)] border-green-500/50 scale-105" : "opacity-60 border-gray-800 scale-100"}`}
-        >
-          <div className="absolute top-0 left-0 right-0 bg-gray-900 px-6 py-3 flex items-center justify-between border-b border-gray-800">
-            <span className="text-gray-400 font-bold tracking-wider">
-              root@kali:~/hydra
-            </span>
-            <div className="flex gap-2">
-              <div className="w-3 h-3 rounded-full bg-red-500/50"></div>
-              <div className="w-3 h-3 rounded-full bg-yellow-500/50"></div>
-              <div className="w-3 h-3 rounded-full bg-green-500/50"></div>
-            </div>
-          </div>
-
-          <div className="mt-10 flex flex-col gap-1.5 text-green-500 font-medium">
-            <div className="text-gray-400 mb-4 text-xl">
-              $ hydra -l {data.mainText} -P rockyou.txt smtp://mail.firma.pl
-            </div>
-            {logs.map((log, i) => (
-              <div
-                key={i}
-                className={`${log.includes("SUCCESS") ? "text-white bg-green-900/80 font-bold p-2 text-xl animate-pulse" : "opacity-90"}`}
-              >
-                {log.includes("[FAILED]") ? (
-                  <>
-                    {log.split("[FAILED]")[0]}
-                    <span className="text-red-500 font-bold">[FAILED]</span>
-                  </>
-                ) : (
-                  log
-                )}
-              </div>
-            ))}
-            {isCracking && <div className="animate-pulse text-2xl mt-2">_</div>}
-          </div>
-
-          {!isCracking && !cracked && (
-            <div className="absolute inset-0 flex items-center justify-center bg-black/70 backdrop-blur-[2px]">
-              <div className="text-gray-500 text-2xl font-mono animate-pulse">
-                OCZEKIWANIE NA ROZPOCZĘCIE ATAKU...
+        <div className="p-10 flex flex-col gap-8 relative">
+          {cracked && viewState === "success" && (
+            <div className="absolute inset-x-0 inset-y-0 z-20 flex items-center justify-center bg-white/70 backdrop-blur-[6px] rounded-b-xl border-t-0 p-8 transition-all duration-700 opacity-0 animate-fade-in">
+              <div className="bg-green-100 border-4 border-green-500 text-green-800 px-8 py-8 rounded-xl font-bold text-4xl text-center shadow-[0_0_40px_rgba(0,255,0,0.6)] w-full transform scale-50 animate-scale-in">
+                Zalogowano pomyślnie
               </div>
             </div>
           )}
+          <div>
+            <label className="block text-gray-600 text-xl font-bold mb-3">
+              Email
+            </label>
+            <input
+              type="email"
+              value={data.mainText}
+              readOnly
+              className="w-full border-2 border-gray-300 rounded-lg p-4 text-2xl text-gray-800 bg-gray-50 focus:outline-none font-medium"
+            />
+          </div>
+          <div>
+            <label className="block text-gray-600 text-xl font-bold mb-3">
+              Hasło
+            </label>
+            <input
+              type="password"
+              value={password}
+              readOnly
+              className={`w-full border-2 rounded-lg p-4 text-2xl focus:outline-none transition-colors duration-300 ${cracked ? "border-green-500 bg-green-50 text-green-700 font-bold" : "border-gray-300 text-gray-800 bg-gray-50 font-medium"}`}
+              placeholder={isCracking ? "Łamanie hasła..." : "••••••••"}
+            />
+          </div>
+          <button
+            onClick={startCracking}
+            disabled={isCracking || cracked}
+            className={`mt-4 w-full font-bold py-4 px-6 rounded-lg text-xl tracking-wide transition-all duration-300 shadow-lg ${
+              isCracking
+                ? "bg-gray-400 cursor-not-allowed text-white"
+                : cracked
+                  ? "bg-blue-600 opacity-50 cursor-not-allowed text-white"
+                  : "bg-blue-600 hover:bg-blue-700 text-white"
+            }`}
+          >
+            {isCracking ? "PRZEPROWADZANIE ATAKU..." : "ZALOGUJ SIĘ"}
+          </button>
+        </div>
+      </div>
+
+      {/* Attacker Terminal */}
+      <div
+        className={`absolute w-full max-w-5xl bg-black rounded-xl border-2 font-mono text-xl p-6 shadow-2xl overflow-hidden min-h-[600px] transition-all duration-[1200ms] ease-in-out z-10
+          ${
+            viewState === "panel"
+              ? "opacity-0 border-gray-800 scale-75 translate-y-[50%] pointer-events-none"
+              : viewState === "terminal"
+                ? "opacity-100 border-green-500 shadow-[0_0_120px_rgba(0,255,0,0.2)] scale-110 translate-y-[-5%] z-30"
+                : "opacity-0 border-green-500 scale-125 translate-y-[60%] blur-[10px] pointer-events-none"
+          }
+        `}
+      >
+        <div className="absolute top-0 left-0 right-0 bg-gray-900 px-6 py-4 flex items-center justify-between border-b border-gray-800">
+          <span className="text-gray-400 font-bold tracking-wider text-xl">
+            root@kali:~/hydra
+          </span>
+          <div className="flex gap-2">
+            <div className="w-4 h-4 rounded-full bg-red-500/50"></div>
+            <div className="w-4 h-4 rounded-full bg-yellow-500/50"></div>
+            <div className="w-4 h-4 rounded-full bg-green-500/50"></div>
+          </div>
+        </div>
+
+        <div className="mt-12 flex flex-col gap-2 text-green-500 font-medium h-[500px] overflow-hidden justify-end">
+          <div className="text-gray-400 mb-2 text-2xl shrink-0">
+            $ hydra -l {data.mainText} -P rockyou.txt smtp://mail.firma.pl
+          </div>
+          <div className="flex flex-col gap-1.5 justify-end">
+            {logs.map((log, i) => {
+              const isSuccess = log.includes("[SUCCESS]");
+              const isFound = log.includes("PASSWORD FOUND");
+
+              if (isSuccess || isFound) {
+                return (
+                  <div
+                    key={i}
+                    className="text-white bg-green-900/90 font-bold p-3 text-3xl shadow-[0_0_20px_rgba(0,255,0,0.6)] rounded border border-green-400 animate-[pulse_1s_ease-in-out_infinite] transform scale-105 my-2 w-full text-center tracking-widest"
+                  >
+                    {log}
+                  </div>
+                );
+              }
+
+              return (
+                <div key={i} className="opacity-90 leading-tight">
+                  {log.includes("[FAILED]") ? (
+                    <>
+                      {log.split("[FAILED]")[0]}
+                      <span className="text-red-500 font-bold">[FAILED]</span>
+                    </>
+                  ) : (
+                    log
+                  )}
+                </div>
+              );
+            })}
+            {isCracking && <div className="animate-pulse text-2xl mt-1">_</div>}
+          </div>
         </div>
       </div>
     </div>
@@ -567,9 +604,9 @@ export const SlideLayout: React.FC<SlideLayoutProps> = ({
 
       case SlideType.IMAGE:
         return (
-          <div className="w-full max-w-[90vw] flex flex-col items-center gap-10">
+          <div className="w-full max-w-[95vw] flex flex-col items-center gap-6 mt-8">
             <div
-              className="text-center space-y-4"
+              className="text-center space-y-2 mb-2"
               style={stagger(isActive, 0, "up")}
             >
               <h2
@@ -579,13 +616,13 @@ export const SlideLayout: React.FC<SlideLayoutProps> = ({
                 {data.mainText}
               </h2>
               {data.description && (
-                <p className="text-gray-300 font-mono text-2xl md:text-4xl max-w-5xl leading-relaxed">
+                <p className="text-gray-300 font-mono text-2xl md:text-3xl max-w-5xl leading-relaxed">
                   {data.description}
                 </p>
               )}
             </div>
 
-            <div className="flex flex-wrap justify-center gap-10 w-full mt-2 items-end">
+            <div className="flex flex-wrap justify-center gap-6 w-full items-end">
               {data.images?.map((img, idx) => (
                 <div key={idx} style={stagger(isActive, 300 + idx * 150, "up")}>
                   <SlideImage
@@ -593,7 +630,7 @@ export const SlideLayout: React.FC<SlideLayoutProps> = ({
                     caption={img.caption}
                     accentColor={accentColor}
                     arrow={img.arrow}
-                    className={img.className}
+                    className={img.className || "max-h-[80vh]"}
                     zoom={img.zoom}
                     zoomOrigin={img.zoomOrigin}
                     isActive={isActive}
@@ -667,17 +704,21 @@ export const SlideLayout: React.FC<SlideLayoutProps> = ({
 
                   {data.bulletPoints && (
                     <ul
-                      className="text-left space-y-6 mt-8 pl-4 md:pl-12"
+                      className="text-left space-y-8 mt-12 pl-4 md:pl-12"
                       style={stagger(isActive, 600, "right")}
                     >
                       {data.bulletPoints.map((point, i) => (
                         <li
                           key={i}
-                          className="font-mono text-gray-300 text-2xl md:text-4xl flex items-start"
+                          className="font-mono text-gray-200 text-3xl md:text-5xl flex items-center bg-black/20 p-6 rounded-xl border border-gray-800 shadow-lg"
+                          style={stagger(isActive, 800 + i * 250, "right")}
                         >
                           <span
-                            style={{ color: accentColor }}
-                            className="mr-6 font-bold"
+                            style={{
+                              color: accentColor,
+                              textShadow: `0 0 15px ${accentColor}`,
+                            }}
+                            className="mr-6 font-bold text-4xl"
                           >
                             •
                           </span>
