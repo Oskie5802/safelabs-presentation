@@ -5,6 +5,7 @@ export enum SlideType {
   WARNING = 'WARNING',
   INFO = 'INFO',
   LIST = 'LIST',
+  LIVE_DEMO = 'LIVE_DEMO', // Nowy typ dla Live Demo
   IFRAME = 'IFRAME', // Nowy typ dla strony WWW
   IMAGE = 'IMAGE',   // Nowy typ dla zdjęć
 }

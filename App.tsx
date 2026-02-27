@@ -4,6 +4,7 @@ import { SLIDES } from "./constants";
 
 const App: React.FC = () => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const [blockNavigation, setBlockNavigation] = useState(false);
 
   // Navigation Logic
   const goToNextSlide = useCallback(() => {
@@ -19,6 +20,11 @@ const App: React.FC = () => {
   // Keyboard Event Listener
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (blockNavigation && (e.key === "ArrowRight" || e.key === "Space")) {
+        window.dispatchEvent(new CustomEvent("slide-step"));
+        return;
+      }
+
       if (e.key === "ArrowRight" || e.key === "Space") {
         goToNextSlide();
       } else if (e.key === "ArrowLeft") {
@@ -44,12 +50,7 @@ const App: React.FC = () => {
     };
 
     window.addEventListener("keydown", handleKeyDown);
-    window.addEventListener("mousedown", handleMouseDown);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      window.removeEventListener("mousedown", handleMouseDown);
-    };
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [goToNextSlide, goToPrevSlide]);
 
   return (
@@ -75,6 +76,7 @@ const App: React.FC = () => {
             key={slide.id}
             data={slide}
             isActive={index === currentSlideIndex}
+            setBlockNavigation={index === currentSlideIndex ? setBlockNavigation : undefined}
           />
         ))}
       </div>

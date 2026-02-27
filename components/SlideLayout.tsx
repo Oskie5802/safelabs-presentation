@@ -6,6 +6,7 @@ import { ArrowUp, ArrowDown, ArrowLeft, ArrowRight } from "lucide-react";
 interface SlideLayoutProps {
   data: SlideContent;
   isActive: boolean;
+  setBlockNavigation?: (blocked: boolean) => void;
 }
 
 // Utility: staggered transition style for child elements
@@ -165,7 +166,204 @@ const SlideImage = ({
   );
 };
 
-export const SlideLayout: React.FC<SlideLayoutProps> = ({ data, isActive }) => {
+const LiveDemoContent = ({ data, accentColor, setBlockNavigation, isActive }: { data: SlideContent; accentColor: string; setBlockNavigation?: (blocked: boolean) => void; isActive: boolean }) => {
+  const [password, setPassword] = useState("");
+  const [logs, setLogs] = useState<string[]>([]);
+  const [isCracking, setIsCracking] = useState(false);
+  const [cracked, setCracked] = useState(false);
+  
+  // Camera/View State: 'panel' | 'terminal' | 'success'
+  const [viewState, setViewState] = useState<'panel' | 'terminal' | 'success'>('panel');
+
+  // Initialize and Reset
+  React.useEffect(() => {
+    if (isActive) {
+      setPassword("");
+      setLogs([]);
+      setIsCracking(false);
+      setCracked(false);
+      setViewState('panel');
+      setBlockNavigation?.(true); 
+    } else {
+        setBlockNavigation?.(false); 
+    }
+  }, [isActive, setBlockNavigation]);
+
+  const startCracking = () => {
+    if (isCracking || cracked) return;
+    
+    // Step 1: Start cracking logic
+    setIsCracking(true);
+    setLogs((prev) => [...prev, "> Inicjowanie ataku słownikowego...", "> Ładowanie wordlisty rockyou.txt..."]);
+    
+    // Step 2: Move camera to terminal
+    setViewState('terminal');
+    
+    // Unblock navigation after starting attack
+    setBlockNavigation?.(false);
+  };
+
+  // Listen for custom event from App.tsx
+  React.useEffect(() => {
+    if (!isActive) return;
+
+    const handleSlideStep = () => {
+      startCracking();
+    };
+
+    window.addEventListener("slide-step", handleSlideStep);
+    return () => window.removeEventListener("slide-step", handleSlideStep);
+  }, [isActive, isCracking, cracked, setBlockNavigation]);
+
+  React.useEffect(() => {
+    if (!isCracking) return;
+
+    const commonPasswords = [
+      "123456", "password", "12345678", "qwerty", "123456789", "12345", "111111", "1234567", "dragon",
+      "adobe123", "123123", "football", "qwertyuiop", "monkey", "letmein", "princess", "shadow", "sunshine",
+      "666666", "computer", "orange", "pussy", "master", "charlie", "superman", "jordan", "michael",
+      "fuckyou", "secret", "harley", "battery", "starwars", "justin", "binker", "liverpool", "arsenal"
+    ];
+
+    const interval = setInterval(() => {
+      const randomPass = commonPasswords[Math.floor(Math.random() * commonPasswords.length)];
+      setLogs((prev) => {
+        const newLogs = [...prev, `> Checking: ${randomPass} [FAILED]`];
+        if (newLogs.length > 18) return newLogs.slice(newLogs.length - 18); 
+        return newLogs;
+      });
+    }, 40); 
+
+    const timeout = setTimeout(() => {
+      clearInterval(interval);
+      setIsCracking(false);
+      setCracked(true);
+      const finalPass = "zaq12wsx";
+      setLogs((prev) => [...prev, `> Checking: ${finalPass} [SUCCESS]`, `> PASSWORD FOUND: ${finalPass}`]);
+      setPassword(finalPass);
+      
+      // Step 3: Move camera back to panel after 1s delay
+      setTimeout(() => {
+          setViewState('success');
+      }, 1000);
+      
+    }, 4000); 
+
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timeout);
+    };
+  }, [isCracking]);
+
+  // Calculate transforms based on viewState
+  // Smooth translation without zoom
+  const getContainerStyle = () => {
+      const baseStyle = { transition: 'transform 1.2s cubic-bezier(0.22, 1, 0.36, 1)' };
+      
+      if (viewState === 'panel') {
+          // Move down to center the panel
+          return { ...baseStyle, transform: 'translateY(15vh)' };
+      }
+      if (viewState === 'terminal') {
+          // Move up to center the terminal
+          return { ...baseStyle, transform: 'translateY(-15vh)' };
+      }
+      if (viewState === 'success') {
+          // Center everything
+          return { ...baseStyle, transform: 'translateY(0)' };
+      }
+      return baseStyle;
+  };
+
+  return (
+    <div className="w-full h-full flex items-center justify-center overflow-hidden">
+        <div 
+            className="w-full max-w-5xl flex flex-col items-center gap-12"
+            style={getContainerStyle()}
+        >
+        {/* Login Panel - Larger for TV */}
+        <div className={`w-full max-w-2xl bg-white rounded-xl shadow-2xl overflow-hidden transition-all duration-700 border-2 ${viewState === 'panel' ? 'shadow-[0_0_60px_rgba(255,255,255,0.4)] border-blue-400 scale-105' : 'opacity-60 border-gray-200 scale-100 grayscale-[0.5]'}`}>
+            <div className="bg-gray-100 px-8 py-6 border-b border-gray-200 flex justify-between items-center">
+            <span className="font-bold text-gray-700 text-2xl">Panel Logowania</span>
+            <div className="flex gap-3">
+                <div className="w-4 h-4 rounded-full bg-red-400"></div>
+                <div className="w-4 h-4 rounded-full bg-yellow-400"></div>
+                <div className="w-4 h-4 rounded-full bg-green-400"></div>
+            </div>
+            </div>
+            <div className="p-10 flex flex-col gap-8">
+            <div>
+                <label className="block text-gray-600 text-xl font-bold mb-3">Email</label>
+                <input 
+                type="email" 
+                value={data.mainText} 
+                readOnly 
+                className="w-full border-2 border-gray-300 rounded-lg p-4 text-2xl text-gray-800 bg-gray-50 focus:outline-none font-medium"
+                />
+            </div>
+            <div>
+                <label className="block text-gray-600 text-xl font-bold mb-3">Hasło</label>
+                <input 
+                type="password" 
+                value={password}
+                readOnly
+                className={`w-full border-2 rounded-lg p-4 text-2xl text-gray-800 focus:outline-none transition-colors duration-300 ${cracked ? 'border-green-500 bg-green-50 text-green-700 font-bold' : 'border-gray-300'}`}
+                placeholder={isCracking ? "Łamanie hasła..." : "••••••••"}
+                />
+            </div>
+            <button 
+                onClick={startCracking}
+                disabled={isCracking || cracked}
+                className={`mt-4 w-full font-bold py-4 px-6 rounded-lg text-xl tracking-wide transition-all duration-300 shadow-lg ${
+                isCracking 
+                    ? 'bg-gray-400 cursor-not-allowed' 
+                    : cracked 
+                    ? 'bg-green-500 hover:bg-green-600 text-white' 
+                    : 'bg-blue-600 hover:bg-blue-700 text-white'
+                }`}
+            >
+                {isCracking ? 'PRZEPROWADZANIE ATAKU...' : cracked ? 'DOSTĘP UZYSKANY' : 'ZALOGUJ SIĘ'}
+            </button>
+            </div>
+        </div>
+
+        {/* Attacker Terminal - Larger font */}
+        <div className={`w-full bg-black rounded-xl border-2 font-mono text-lg p-6 shadow-2xl relative overflow-hidden min-h-[400px] transition-all duration-700 ${viewState === 'terminal' ? 'shadow-[0_0_80px_rgba(0,255,0,0.3)] border-green-500/50 scale-105' : 'opacity-60 border-gray-800 scale-100'}`}>
+            <div className="absolute top-0 left-0 right-0 bg-gray-900 px-6 py-3 flex items-center justify-between border-b border-gray-800">
+            <span className="text-gray-400 font-bold tracking-wider">root@kali:~/hydra</span>
+            <div className="flex gap-2">
+                <div className="w-3 h-3 rounded-full bg-red-500/50"></div>
+                <div className="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+                <div className="w-3 h-3 rounded-full bg-green-500/50"></div>
+            </div>
+            </div>
+            
+            <div className="mt-10 flex flex-col gap-1.5 text-green-500 font-medium">
+            <div className="text-gray-400 mb-4 text-xl">$ hydra -l {data.mainText} -P rockyou.txt smtp://mail.firma.pl</div>
+            {logs.map((log, i) => (
+                <div key={i} className={`${log.includes('SUCCESS') ? 'text-white bg-green-900/80 font-bold p-2 text-xl animate-pulse' : 'opacity-90'}`}>
+                {log}
+                </div>
+            ))}
+            {isCracking && (
+                <div className="animate-pulse text-2xl mt-2">_</div>
+            )}
+            </div>
+            
+            {!isCracking && !cracked && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/70 backdrop-blur-[2px]">
+                <div className="text-gray-500 text-2xl font-mono animate-pulse">
+                    OCZEKIWANIE NA ROZPOCZĘCIE ATAKU...
+                </div>
+            </div>
+            )}
+        </div>
+        </div>
+    </div>
+  );
+};
+
+export const SlideLayout: React.FC<SlideLayoutProps> = ({ data, isActive, setBlockNavigation }) => {
   const Icon = data.icon;
   const accentColor = data.accentColor || "#00F3FF";
 
@@ -225,6 +423,18 @@ export const SlideLayout: React.FC<SlideLayoutProps> = ({ data, isActive }) => {
                 </div>
               )}
             </div>
+          </div>
+        );
+
+      case SlideType.LIVE_DEMO:
+        return (
+          <div className="w-full flex justify-center" style={stagger(isActive, 0, "scale")}>
+             <LiveDemoContent 
+               data={data} 
+               accentColor={accentColor} 
+               setBlockNavigation={setBlockNavigation} 
+               isActive={isActive} 
+             />
           </div>
         );
 

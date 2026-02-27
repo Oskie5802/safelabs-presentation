@@ -114,6 +114,16 @@ export const SLIDES: SlideContent[] = [
     accentColor: "#00F3FF",
   },
 
+  // SLAJD 6.25: Live Demo Bruteforce
+  {
+    id: 'live-bruteforce',
+    type: SlideType.LIVE_DEMO,
+    title: 'ATAK BRUTEFORCE',
+    mainText: 'admin@firma.pl', // Pre-filled email
+    icon: Terminal,
+    accentColor: '#00F3FF'
+  },
+
   // SLAJD 6.5: Osadzona strona (Iframe)
   {
     id: "live-demo-web",
