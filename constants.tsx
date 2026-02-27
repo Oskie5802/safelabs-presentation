@@ -394,6 +394,22 @@ export const SLIDES: SlideContent[] = [
     ],
   },
 
+  // SLAJD 21.5: Czego nie wrzucać
+  {
+    id: "osint-dont-upload",
+    type: SlideType.LIST,
+    title: "OSINT",
+    mainText: "CZEGO NIE WRZUCAĆ?",
+    bulletPoints: [
+      "Zdjęcia dowodu osobistego / paszportu",
+      "Zdjęcia kart płatniczych",
+      "Bilety lotnicze i na koncerty",
+      "Zdjęcia kluczy do mieszkania",
+    ],
+    icon: Globe,
+    accentColor: "#FF2A2A",
+  },
+
   // === ZAKOŃCZENIE ===
 
   // SLAJD 22: Co robić jak jest przypał

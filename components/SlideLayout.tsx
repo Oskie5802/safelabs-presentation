@@ -704,13 +704,13 @@ export const SlideLayout: React.FC<SlideLayoutProps> = ({
 
                   {data.bulletPoints && (
                     <ul
-                      className="text-left space-y-8 mt-12 pl-4 md:pl-12"
+                      className="text-left space-y-4 mt-8 pl-4 md:pl-12"
                       style={stagger(isActive, 600, "right")}
                     >
                       {data.bulletPoints.map((point, i) => (
                         <li
                           key={i}
-                          className="font-mono text-gray-200 text-3xl md:text-5xl flex items-center bg-black/20 p-6 rounded-xl border border-gray-800 shadow-lg"
+                          className="font-mono text-gray-200 text-xl md:text-3xl flex items-center bg-black/20 p-4 rounded-xl border border-gray-800 shadow-lg"
                           style={stagger(isActive, 800 + i * 250, "right")}
                         >
                           <span
@@ -718,7 +718,7 @@ export const SlideLayout: React.FC<SlideLayoutProps> = ({
                               color: accentColor,
                               textShadow: `0 0 15px ${accentColor}`,
                             }}
-                            className="mr-6 font-bold text-4xl"
+                            className="mr-4 font-bold text-2xl md:text-3xl"
                           >
                             •
                           </span>
