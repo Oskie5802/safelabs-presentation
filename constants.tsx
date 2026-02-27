@@ -102,26 +102,26 @@ export const SLIDES: SlideContent[] = [
     accentColor: "#FF2A2A",
   },
 
-  // === SEKCJA LIVE DEMO ===
-
-  // SLAJD 6: Live Demo (Tylko tytuł sekcji)
+  // SLAJD X: Live Demo Bruteforce (przeniesiony)
   {
-    id: "live-demo",
-    type: SlideType.TITLE,
-    title: "LIVE DEMO",
-    subtitle: "ŁAMANIE HASEŁ",
+    id: "live-bruteforce",
+    type: SlideType.LIVE_DEMO,
+    title: "ATAK BRUTEFORCE",
+    mainText: "admin@firma.pl", // Pre-filled email
     icon: Terminal,
     accentColor: "#00F3FF",
   },
 
-  // SLAJD 6.25: Live Demo Bruteforce
+  // === SEKCJA LIVE DEMO WEB ===
+
+  // SLAJD 6: Live Demo (Tytuł sekcji weryfikacji)
   {
-    id: 'live-bruteforce',
-    type: SlideType.LIVE_DEMO,
-    title: 'ATAK BRUTEFORCE',
-    mainText: 'admin@firma.pl', // Pre-filled email
-    icon: Terminal,
-    accentColor: '#00F3FF'
+    id: "live-demo",
+    type: SlideType.TITLE,
+    title: "SPRAWDŹ",
+    subtitle: "SWOJE HASŁO",
+    icon: Globe,
+    accentColor: "#00F3FF",
   },
 
   // SLAJD 6.5: Osadzona strona (Iframe)
@@ -242,8 +242,8 @@ export const SLIDES: SlideContent[] = [
     title: "PRZYKŁAD 2",
     mainText: "INSTAGRAM",
     icon: Instagram,
-    accentColor: '#FF2A2A',
-    images: [{ url: freeiphoneImg }]
+    accentColor: "#FF2A2A",
+    images: [{ url: freeiphoneImg }],
   },
 
   // SLAJD 12: Instagram Wyjaśnienie
@@ -254,9 +254,11 @@ export const SLIDES: SlideContent[] = [
     mainText: "Wyjaśnienie",
     description: "Zawsze weryfikuj profil.",
     icon: Info,
-    images: [{ 
-      url: freeiphoneImg, 
-    }]
+    images: [
+      {
+        url: freeiphoneImg,
+      },
+    ],
   },
 
   // SLAJD 13: Fałszywe Maile
