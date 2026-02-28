@@ -515,23 +515,20 @@ const SplitIframeContent = ({
   }, [isActive, data.refreshInterval]);
 
   return (
-    <div className="w-full h-[80vh] flex flex-col md:flex-row gap-8 p-4 relative z-20">
+    <div className="w-[95vw] h-[85vh] flex flex-col md:flex-row gap-6 p-0 relative z-20">
       <div className="flex-1 flex flex-col items-center gap-4">
         <h3 className="text-3xl font-bold font-mono text-gray-300 tracking-wider">OFIARA (PHISHING)</h3>
-        <div className="w-full h-full bg-white rounded-lg overflow-hidden border-4 relative shadow-2xl" style={{ borderColor: accentColor }}>
-          <div className="absolute top-0 left-0 bg-black text-white px-4 py-2 font-mono text-sm z-10 rounded-br-lg border-b border-r shadow-lg" style={{ borderColor: accentColor }}>
-            {data.contentUrl?.replace(/^https?:\/\//, '')}
-          </div>
+        <div className="w-full h-full bg-white rounded-xl overflow-hidden border-4 relative shadow-2xl transition-transform hover:scale-[1.01] duration-700" style={{ borderColor: accentColor }}>
           <iframe src={data.contentUrl} className="w-full h-full" sandbox="allow-same-origin allow-scripts allow-forms" />
         </div>
       </div>
 
       <div className="flex-1 flex flex-col items-center gap-4">
         <h3 className="flex items-center gap-3 text-3xl font-bold font-mono text-red-500 tracking-wider">HAKER (PANEL)<span className="animate-pulse">🔴</span></h3>
-        <div className="w-full h-full bg-white rounded-lg overflow-hidden border-4 relative shadow-[0_0_50px_rgba(255,42,42,0.4)]" style={{ borderColor: '#FF2A2A' }}>
-          <div className="absolute top-0 left-0 bg-black text-white px-4 py-2 font-mono text-sm z-10 rounded-br-lg border-b border-r shadow-lg flex items-center gap-3" style={{ borderColor: '#FF2A2A' }}>
-            {data.rightContentUrl?.replace(/^https?:\/\//, '')}
-            <span className="text-xs text-red-500 font-bold border border-red-500 px-2 py-0.5 rounded animate-pulse">LIVE</span>
+        <div className="w-full h-full bg-white rounded-xl overflow-hidden border-4 relative shadow-[0_0_60px_rgba(255,42,42,0.4)] transition-transform hover:scale-[1.01] duration-700" style={{ borderColor: '#FF2A2A' }}>
+          <div className="absolute top-4 right-4 z-20 flex items-center gap-2 bg-black/80 px-3 py-1.5 rounded-full border border-red-500 shadow-[0_0_15px_rgba(255,42,42,0.4)]">
+            <div className="w-2.5 h-2.5 bg-red-500 rounded-full animate-pulse"></div>
+            <span className="text-xs text-red-500 font-bold tracking-widest">LIVE</span>
           </div>
           <iframe key={key} src={data.rightContentUrl} className="w-full h-full" sandbox="allow-same-origin allow-scripts allow-forms" />
         </div>
