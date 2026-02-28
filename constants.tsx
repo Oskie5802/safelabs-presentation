@@ -107,7 +107,7 @@ export const SLIDES: SlideContent[] = [
     id: "live-bruteforce",
     type: SlideType.LIVE_DEMO,
     title: "ATAK BRUTEFORCE",
-    mainText: "admin@firma.pl", // Pre-filled email
+    mainText: "oskar@gmail.com", // Pre-filled email
     icon: Terminal,
     accentColor: "#00F3FF",
   },
