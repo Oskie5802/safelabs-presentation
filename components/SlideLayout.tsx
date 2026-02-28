@@ -125,15 +125,15 @@ const SlideImage = ({
 
   const zoomStyle: React.CSSProperties = shouldZoom
     ? {
-        transformOrigin,
-        transform: `scale(${scaleValue})`,
-        transition: "transform 1.5s cubic-bezier(0.22, 1, 0.36, 1)",
-      }
+      transformOrigin,
+      transform: `scale(${scaleValue})`,
+      transition: "transform 1.5s cubic-bezier(0.22, 1, 0.36, 1)",
+    }
     : {
-        transformOrigin,
-        transform: "scale(1)",
-        transition: "transform 1s ease-out",
-      };
+      transformOrigin,
+      transform: "scale(1)",
+      transition: "transform 1s ease-out",
+    };
 
   return (
     <div className="group relative">
@@ -364,12 +364,11 @@ const LiveDemoContent = ({
       {/* Login Panel */}
       <div
         className={`absolute w-full max-w-2xl bg-white rounded-xl shadow-2xl overflow-hidden transition-all duration-[1200ms] ease-in-out border-2 z-20
-          ${
-            viewState === "panel"
-              ? "shadow-[0_0_60px_rgba(255,255,255,0.4)] border-blue-400 scale-100 translate-y-0 opacity-100"
-              : viewState === "terminal"
-                ? "opacity-30 border-gray-200 scale-[0.6] -translate-y-[80%] blur-[4px] grayscale-[0.8]"
-                : "shadow-[0_0_80px_rgba(0,255,0,0.5)] border-green-500 scale-110 translate-y-0 opacity-100 z-30"
+          ${viewState === "panel"
+            ? "shadow-[0_0_60px_rgba(255,255,255,0.4)] border-blue-400 scale-100 translate-y-0 opacity-100"
+            : viewState === "terminal"
+              ? "opacity-30 border-gray-200 scale-[0.6] -translate-y-[80%] blur-[4px] grayscale-[0.8]"
+              : "shadow-[0_0_80px_rgba(0,255,0,0.5)] border-green-500 scale-110 translate-y-0 opacity-100 z-30"
           }
         `}
       >
@@ -417,13 +416,12 @@ const LiveDemoContent = ({
           <button
             onClick={startCracking}
             disabled={isCracking || cracked}
-            className={`mt-4 w-full font-bold py-4 px-6 rounded-lg text-xl tracking-wide transition-all duration-300 shadow-lg ${
-              isCracking
-                ? "bg-gray-400 cursor-not-allowed text-white"
-                : cracked
-                  ? "bg-blue-600 opacity-50 cursor-not-allowed text-white"
-                  : "bg-blue-600 hover:bg-blue-700 text-white"
-            }`}
+            className={`mt-4 w-full font-bold py-4 px-6 rounded-lg text-xl tracking-wide transition-all duration-300 shadow-lg ${isCracking
+              ? "bg-gray-400 cursor-not-allowed text-white"
+              : cracked
+                ? "bg-blue-600 opacity-50 cursor-not-allowed text-white"
+                : "bg-blue-600 hover:bg-blue-700 text-white"
+              }`}
           >
             {isCracking ? "PRZEPROWADZANIE ATAKU..." : "ZALOGUJ SIĘ"}
           </button>
@@ -433,12 +431,11 @@ const LiveDemoContent = ({
       {/* Attacker Terminal */}
       <div
         className={`absolute w-full max-w-5xl bg-black rounded-xl border-2 font-mono text-xl p-6 shadow-2xl overflow-hidden min-h-[600px] transition-all duration-[1200ms] ease-in-out z-10
-          ${
-            viewState === "panel"
-              ? "opacity-0 border-gray-800 scale-75 translate-y-[50%] pointer-events-none"
-              : viewState === "terminal"
-                ? "opacity-100 border-green-500 shadow-[0_0_120px_rgba(0,255,0,0.2)] scale-110 translate-y-[-5%] z-30"
-                : "opacity-0 border-green-500 scale-125 translate-y-[60%] blur-[10px] pointer-events-none"
+          ${viewState === "panel"
+            ? "opacity-0 border-gray-800 scale-75 translate-y-[50%] pointer-events-none"
+            : viewState === "terminal"
+              ? "opacity-100 border-green-500 shadow-[0_0_120px_rgba(0,255,0,0.2)] scale-110 translate-y-[-5%] z-30"
+              : "opacity-0 border-green-500 scale-125 translate-y-[60%] blur-[10px] pointer-events-none"
           }
         `}
       >
@@ -494,6 +491,55 @@ const LiveDemoContent = ({
   );
 };
 
+const SplitIframeContent = ({
+  data,
+  accentColor,
+  isActive,
+}: {
+  data: SlideContent;
+  accentColor: string;
+  isActive: boolean;
+}) => {
+  const [key, setKey] = useState(0);
+
+  React.useEffect(() => {
+    if (!isActive || !data.refreshInterval) return;
+
+    setKey(0);
+
+    const interval = setInterval(() => {
+      setKey((prev) => prev + 1);
+    }, data.refreshInterval);
+
+    return () => clearInterval(interval);
+  }, [isActive, data.refreshInterval]);
+
+  return (
+    <div className="w-full h-[80vh] flex flex-col md:flex-row gap-8 p-4 relative z-20">
+      <div className="flex-1 flex flex-col items-center gap-4">
+        <h3 className="text-3xl font-bold font-mono text-gray-300 tracking-wider">OFIARA (PHISHING)</h3>
+        <div className="w-full h-full bg-white rounded-lg overflow-hidden border-4 relative shadow-2xl" style={{ borderColor: accentColor }}>
+          <div className="absolute top-0 left-0 bg-black text-white px-4 py-2 font-mono text-sm z-10 rounded-br-lg border-b border-r shadow-lg" style={{ borderColor: accentColor }}>
+            {data.contentUrl?.replace(/^https?:\/\//, '')}
+          </div>
+          <iframe src={data.contentUrl} className="w-full h-full" sandbox="allow-same-origin allow-scripts allow-forms" />
+        </div>
+      </div>
+
+      <div className="flex-1 flex flex-col items-center gap-4">
+        <h3 className="flex items-center gap-3 text-3xl font-bold font-mono text-red-500 tracking-wider">HAKER (PANEL)<span className="animate-pulse">🔴</span></h3>
+        <div className="w-full h-full bg-white rounded-lg overflow-hidden border-4 relative shadow-[0_0_50px_rgba(255,42,42,0.4)]" style={{ borderColor: '#FF2A2A' }}>
+          <div className="absolute top-0 left-0 bg-black text-white px-4 py-2 font-mono text-sm z-10 rounded-br-lg border-b border-r shadow-lg flex items-center gap-3" style={{ borderColor: '#FF2A2A' }}>
+            {data.rightContentUrl?.replace(/^https?:\/\//, '')}
+            <span className="text-xs text-red-500 font-bold border border-red-500 px-2 py-0.5 rounded animate-pulse">LIVE</span>
+          </div>
+          <iframe key={key} src={data.rightContentUrl} className="w-full h-full" sandbox="allow-same-origin allow-scripts allow-forms" />
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export const SlideLayout: React.FC<SlideLayoutProps> = ({
   data,
   isActive,
@@ -503,11 +549,10 @@ export const SlideLayout: React.FC<SlideLayoutProps> = ({
   const accentColor = data.accentColor || "#00F3FF";
 
   // Base transition styles
-  const containerClasses = `absolute inset-0 flex flex-col items-center justify-center p-8 transition-all duration-500 ease-out ${
-    isActive
-      ? "opacity-100 scale-100 blur-0 z-20 pointer-events-auto"
-      : "opacity-0 scale-95 blur-sm z-0 pointer-events-none"
-  }`;
+  const containerClasses = `absolute inset-0 flex flex-col items-center justify-center p-8 transition-all duration-500 ease-out ${isActive
+    ? "opacity-100 scale-100 blur-0 z-20 pointer-events-auto"
+    : "opacity-0 scale-95 blur-sm z-0 pointer-events-none"
+    }`;
 
   const renderContent = () => {
     switch (data.type) {
@@ -599,6 +644,20 @@ export const SlideLayout: React.FC<SlideLayoutProps> = ({
                 sandbox="allow-same-origin allow-scripts allow-forms"
               />
             </div>
+          </div>
+        );
+
+      case SlideType.SPLIT_IFRAME:
+        return (
+          <div
+            className="w-full flex justify-center"
+            style={stagger(isActive, 100, "scale")}
+          >
+            <SplitIframeContent
+              data={data}
+              accentColor={accentColor}
+              isActive={isActive}
+            />
           </div>
         );
 

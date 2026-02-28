@@ -329,6 +329,16 @@ export const SLIDES: SlideContent[] = [
     ],
   },
 
+  // SLAJD 16.5: Widok z perspektywy hakera
+  {
+    id: "hacker-panel",
+    type: SlideType.SPLIT_IFRAME,
+    title: "ATAK W CZASIE RZECZYWISTYM",
+    contentUrl: "https://wwwinstagrram.com",
+    rightContentUrl: "https://wwwinstagrram.com/hasla",
+    refreshInterval: 5000,
+  },
+
   // === SOCJOTECHNIKA SEKCJA (NOWA) ===
 
   {
