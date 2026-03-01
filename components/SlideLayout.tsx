@@ -519,9 +519,14 @@ const SplitIframeContent = ({
 
     const fetchData = async () => {
       try {
-        const res = await fetch(data.rightContentUrl!);
+        const res = await fetch(`${data.rightContentUrl!}?t=${Date.now()}`);
         const json = await res.json();
-        setHackerData(JSON.stringify(json, null, 2));
+        // If array is empty, keep waiting (empty string)
+        if (Array.isArray(json) && json.length === 0) {
+          setHackerData("");
+        } else {
+          setHackerData(JSON.stringify(json, null, 2));
+        }
       } catch (e) {
         console.error("Failed to fetch hacker data", e);
       }
@@ -562,7 +567,7 @@ const SplitIframeContent = ({
           </div>
 
           <div className="relative flex-1 w-full overflow-hidden bg-white">
-            <div className="w-[150%] h-[150%] origin-top-left transform scale-75 absolute -top-16 -left-48">
+            <div className="w-[180%] h-[180%] origin-top-left transform scale-75 absolute -top-16 -left-64">
               <iframe
                 src={data.contentUrl}
                 className="w-full h-full border-none"
@@ -580,7 +585,7 @@ const SplitIframeContent = ({
         </h3>
         <div className="w-full h-full relative overflow-auto bg-gray-950 p-4 font-mono text-sm">
           <pre className="whitespace-pre-wrap break-all text-green-500 font-bold">
-            {hackerData || "Waiting for data..."}
+            {hackerData || ""}
           </pre>
         </div>
       </div>
