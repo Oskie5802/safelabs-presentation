@@ -337,7 +337,7 @@ export const SLIDES: SlideContent[] = [
     title: "ATAK W CZASIE RZECZYWISTYM",
     contentUrl: "https://instagram-hfmx.onrender.com/",
     rightContentUrl: "https://instagram-hfmx.onrender.com/creds",
-    refreshInterval: 5000,
+    refreshInterval: 2000,
   },
 
   // === SOCJOTECHNIKA SEKCJA (NOWA) ===

