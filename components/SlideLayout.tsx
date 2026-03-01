@@ -340,6 +340,9 @@ const LiveDemoContent = ({
       const finalPass = "oskar123";
       setLogs((prev) => [
         ...prev,
+        `> Checking: oskar [FAILED]`,
+        `> Checking: oskar1 [FAILED]`,
+        `> Checking: oskar12 [FAILED]`,
         `> Checking: ${finalPass} [SUCCESS]`,
         `> PASSWORD FOUND: ${finalPass}`,
       ]);
@@ -350,7 +353,7 @@ const LiveDemoContent = ({
         setViewState("success");
         // Navigation is unblocked so next right arrow proceeds to next slide
         setBlockNavigation?.(false);
-      }, 3000);
+      }, 5000);
     }, 7000); // Increased cracking time from 4s to 7s
 
     return () => {

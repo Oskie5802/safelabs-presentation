@@ -37,6 +37,7 @@ import osintImg from "./assets/osint.png";
 import oszustwoBlikImg from "./assets/oszustwo-blik.png";
 import paczkaImg from "./assets/paczka.png";
 import smsImg from "./assets/sms.png";
+import kluczImg from "./assets/klucz.jpeg";
 
 /**
  * ==========================================
@@ -147,14 +148,14 @@ export const SLIDES: SlideContent[] = [
     id: "pass-manager",
     type: SlideType.IMAGE,
     title: "ROZWIĄZANIE",
-    mainText: "PASSWORD MANAGER",
+    mainText: "MENEDŻER HASEŁ",
     description: "Używaj wbudowanych menedżerów haseł.",
     icon: KeyRound,
     accentColor: "#00FF41",
     images: [
       {
         url: gpsImg,
-        caption: "Google Password Manager",
+        caption: "Menedżer haseł Google",
       },
       {
         url: appleKeychainImg,
@@ -399,6 +400,23 @@ export const SLIDES: SlideContent[] = [
     images: [
       {
         url: osintImg,
+        className: "h-[65vh] w-auto",
+      },
+    ],
+  },
+
+  // SLAJD 21.4: Jak łatwo dorobić klucz
+  {
+    id: "how-to-copy-key",
+    type: SlideType.IMAGE,
+    title: "OSINT",
+    mainText: "JAK ŁATWO DOROBIĆ KLUCZ",
+    description: "Wystarczy zdjęcie klucza, by stworzyć jego kopię.",
+    icon: ImageIcon,
+    accentColor: "#FF2A2A",
+    images: [
+      {
+        url: kluczImg,
         className: "h-[65vh] w-auto",
       },
     ],
