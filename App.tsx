@@ -90,7 +90,7 @@ const App: React.FC = () => {
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-900/10 rounded-full blur-[128px] pointer-events-none"></div>
 
       {/* Render All Slides (stacked, handled by opacity in SlideLayout) */}
-      <div className="relative z-10 w-full h-full max-w-[80vw] mx-auto">
+      <div className="relative z-10 w-full h-full mx-auto">
         {SLIDES.map((slide, index) => (
           <SlideLayout
             key={slide.id}

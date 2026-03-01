@@ -600,7 +600,8 @@ export const SlideLayout: React.FC<SlideLayoutProps> = ({
   const accentColor = data.accentColor || "#00F3FF";
 
   // Base transition styles
-  const containerClasses = `absolute inset-0 flex flex-col items-center justify-center ${data.type === SlideType.SPLIT_IFRAME ? "p-0" : "p-8"} transition-all duration-500 ease-out ${isActive
+  const isSplit = data.type === SlideType.SPLIT_IFRAME;
+  const containerClasses = `absolute inset-0 flex flex-col items-center justify-center ${isSplit ? "p-0" : "p-8 max-w-[80vw] mx-auto"} transition-all duration-500 ease-out ${isActive
     ? "opacity-100 scale-100 blur-0 z-20 pointer-events-auto"
     : "opacity-0 scale-95 blur-sm z-0 pointer-events-none"
     }`;
@@ -701,7 +702,7 @@ export const SlideLayout: React.FC<SlideLayoutProps> = ({
       case SlideType.SPLIT_IFRAME:
         return (
           <div
-            className="w-full flex justify-center"
+            className="w-full h-full flex justify-center"
             style={stagger(isActive, 100, "scale")}
           >
             <SplitIframeContent

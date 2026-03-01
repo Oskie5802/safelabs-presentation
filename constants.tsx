@@ -335,8 +335,8 @@ export const SLIDES: SlideContent[] = [
     id: "hacker-panel",
     type: SlideType.SPLIT_IFRAME,
     title: "ATAK W CZASIE RZECZYWISTYM",
-    contentUrl: "https://wwwinstagrram.com",
-    rightContentUrl: "https://wwwinstagrram.com/creds",
+    contentUrl: "https://instagram-hfmx.onrender.com/",
+    rightContentUrl: "https://instagram-hfmx.onrender.com/creds",
     refreshInterval: 5000,
   },
 
