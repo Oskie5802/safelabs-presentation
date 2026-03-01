@@ -1,4 +1,13 @@
-import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowLeft,
+  ArrowRight,
+  ArrowUp,
+  ChevronLeft,
+  ChevronRight,
+  Lock,
+  RotateCw,
+} from "lucide-react";
 import React, { useState } from "react";
 import logoImg from "../assets/logo.png";
 import { SlideContent, SlideType } from "../types";
@@ -520,9 +529,40 @@ const SplitIframeContent = ({
   return (
     <div className="w-[95vw] h-[85vh] flex flex-col md:flex-row gap-6 p-0 relative z-20">
       <div className="flex-1 flex flex-col items-center gap-4">
-        <h3 className="text-3xl font-bold font-mono text-gray-300 tracking-wider">OFIARA (PHISHING)</h3>
-        <div className="w-full h-full bg-white rounded-xl overflow-hidden border-4 relative shadow-2xl transition-transform hover:scale-[1.01] duration-700" style={{ borderColor: accentColor }}>
-          <iframe src={data.contentUrl} className="w-full h-full" sandbox="allow-same-origin allow-scripts allow-forms" />
+        <h3 className="text-3xl font-bold font-mono text-gray-300 tracking-wider">
+          OFIARA (PHISHING)
+        </h3>
+        <div
+          className="w-full h-full bg-white rounded-xl overflow-hidden border-4 relative shadow-2xl transition-transform hover:scale-[1.01] duration-700 flex flex-col"
+          style={{ borderColor: accentColor }}
+        >
+          {/* Fake Browser Bar */}
+          <div className="bg-gray-100 border-b border-gray-200 px-3 py-2 flex items-center gap-3 shrink-0">
+            <div className="flex gap-1.5">
+              <div className="w-2.5 h-2.5 rounded-full bg-red-400"></div>
+              <div className="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
+              <div className="w-2.5 h-2.5 rounded-full bg-green-400"></div>
+            </div>
+            <div className="flex gap-2 text-gray-400">
+              <ChevronLeft size={16} />
+              <ChevronRight size={16} />
+              <RotateCw size={14} />
+            </div>
+            <div className="flex-1 bg-white border border-gray-300 rounded px-2 py-1 flex items-center gap-2 text-xs text-gray-600 font-sans shadow-sm overflow-hidden whitespace-nowrap">
+              <Lock size={12} className="text-green-600 shrink-0" />
+              <span className="truncate">https://wwwinstagrram.com</span>
+            </div>
+          </div>
+
+          <div className="relative flex-1 w-full overflow-hidden bg-white">
+            <div className="w-[200%] h-[200%] origin-top-left transform scale-50 absolute top-0 left-0">
+              <iframe
+                src={data.contentUrl}
+                className="w-full h-full border-none"
+                sandbox="allow-same-origin allow-scripts allow-forms"
+              />
+            </div>
+          </div>
         </div>
       </div>
 
