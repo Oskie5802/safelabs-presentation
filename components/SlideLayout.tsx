@@ -519,7 +519,11 @@ const SplitIframeContent = ({
 
     const fetchData = async () => {
       try {
-        const res = await fetch(`${data.rightContentUrl!}?t=${Date.now()}`);
+        // Use allorigins.win as a CORS proxy
+        const targetUrl = `${data.rightContentUrl!}?t=${Date.now()}`;
+        const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`;
+        
+        const res = await fetch(proxyUrl);
         const json = await res.json();
         // If array is empty, keep waiting (empty string)
         if (Array.isArray(json) && json.length === 0) {
@@ -567,7 +571,7 @@ const SplitIframeContent = ({
           </div>
 
           <div className="relative flex-1 w-full overflow-hidden bg-white">
-            <div className="w-[180%] h-[180%] origin-top-left transform scale-75 absolute -top-16 -left-64">
+            <div className="w-[125%] h-[125%] origin-top-left transform scale-90 absolute top-0 left-0">
               <iframe
                 src={data.contentUrl}
                 className="w-full h-full border-none"
