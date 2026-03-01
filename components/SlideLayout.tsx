@@ -512,19 +512,28 @@ const SplitIframeContent = ({
   accentColor: string;
   isActive: boolean;
 }) => {
-  const [key, setKey] = useState(0);
+  const [hackerData, setHackerData] = useState<string>("");
 
   React.useEffect(() => {
-    if (!isActive || !data.refreshInterval) return;
+    if (!isActive || !data.rightContentUrl) return;
 
-    setKey(0);
+    const fetchData = async () => {
+      try {
+        const res = await fetch(data.rightContentUrl!);
+        const json = await res.json();
+        setHackerData(JSON.stringify(json, null, 2));
+      } catch (e) {
+        console.error("Failed to fetch hacker data", e);
+      }
+    };
 
-    const interval = setInterval(() => {
-      setKey((prev) => prev + 1);
-    }, data.refreshInterval);
+    fetchData();
 
-    return () => clearInterval(interval);
-  }, [isActive, data.refreshInterval]);
+    if (data.refreshInterval) {
+      const interval = setInterval(fetchData, data.refreshInterval);
+      return () => clearInterval(interval);
+    }
+  }, [isActive, data.rightContentUrl, data.refreshInterval]);
 
   return (
     <div className="w-full h-full flex flex-col md:flex-row relative z-20 bg-safeblack">
@@ -553,7 +562,7 @@ const SplitIframeContent = ({
           </div>
 
           <div className="relative flex-1 w-full overflow-hidden bg-white">
-            <div className="w-[140%] h-[140%] origin-top-left transform scale-80 absolute -top-16 -left-32">
+            <div className="w-[150%] h-[150%] origin-top-left transform scale-75 absolute -top-16 -left-48">
               <iframe
                 src={data.contentUrl}
                 className="w-full h-full border-none"
@@ -569,22 +578,10 @@ const SplitIframeContent = ({
         <h3 className="flex items-center justify-center gap-3 text-xl font-bold font-mono text-red-500 tracking-wider py-2 w-full bg-gray-900 border-b border-gray-800">
           HAKER (PANEL)<span className="animate-pulse">🔴</span>
         </h3>
-        <div className="w-full h-full relative overflow-hidden">
-          <div className="absolute top-4 right-4 z-20 flex items-center gap-2 bg-black/80 px-3 py-1.5 rounded-full border border-red-500 shadow-[0_0_15px_rgba(255,42,42,0.4)]">
-            <div className="w-2.5 h-2.5 bg-red-500 rounded-full animate-pulse"></div>
-            <span className="text-xs text-red-500 font-bold tracking-widest">
-              LIVE
-            </span>
-          </div>
-          {/* Zoomed 2x content */}
-          <div className="w-[50%] h-[50%] origin-top-left transform scale-[2] absolute top-0 left-0">
-            <iframe
-              key={key}
-              src={data.rightContentUrl}
-              className="w-full h-full border-none"
-              sandbox="allow-same-origin allow-scripts allow-forms"
-            />
-          </div>
+        <div className="w-full h-full relative overflow-auto bg-gray-950 p-4 font-mono text-sm">
+          <pre className="whitespace-pre-wrap break-all text-green-500 font-bold">
+            {hackerData || "Waiting for data..."}
+          </pre>
         </div>
       </div>
     </div>
