@@ -527,15 +527,13 @@ const SplitIframeContent = ({
   }, [isActive, data.refreshInterval]);
 
   return (
-    <div className="w-[95vw] h-[85vh] flex flex-col md:flex-row gap-6 p-0 relative z-20">
-      <div className="flex-1 flex flex-col items-center gap-4">
-        <h3 className="text-3xl font-bold font-mono text-gray-300 tracking-wider">
+    <div className="w-full h-full flex flex-col md:flex-row relative z-20 bg-safeblack">
+      {/* Victim View - 2/3 width */}
+      <div className="flex-[2] flex flex-col items-center border-r-4 border-gray-800">
+        <h3 className="text-xl font-bold font-mono text-gray-300 tracking-wider py-2 w-full text-center bg-gray-900 border-b border-gray-800">
           OFIARA (PHISHING)
         </h3>
-        <div
-          className="w-full h-full bg-white rounded-xl overflow-hidden border-4 relative shadow-2xl transition-transform hover:scale-[1.01] duration-700 flex flex-col"
-          style={{ borderColor: accentColor }}
-        >
+        <div className="w-full h-full bg-white relative flex flex-col">
           {/* Fake Browser Bar */}
           <div className="bg-gray-100 border-b border-gray-200 px-3 py-2 flex items-center gap-3 shrink-0">
             <div className="flex gap-1.5">
@@ -566,14 +564,27 @@ const SplitIframeContent = ({
         </div>
       </div>
 
-      <div className="flex-1 flex flex-col items-center gap-4">
-        <h3 className="flex items-center gap-3 text-3xl font-bold font-mono text-red-500 tracking-wider">HAKER (PANEL)<span className="animate-pulse">🔴</span></h3>
-        <div className="w-full h-full bg-white rounded-xl overflow-hidden border-4 relative shadow-[0_0_60px_rgba(255,42,42,0.4)] transition-transform hover:scale-[1.01] duration-700" style={{ borderColor: '#FF2A2A' }}>
+      {/* Hacker View - 1/3 width */}
+      <div className="flex-1 flex flex-col items-center bg-black">
+        <h3 className="flex items-center justify-center gap-3 text-xl font-bold font-mono text-red-500 tracking-wider py-2 w-full bg-gray-900 border-b border-gray-800">
+          HAKER (PANEL)<span className="animate-pulse">🔴</span>
+        </h3>
+        <div className="w-full h-full relative overflow-hidden">
           <div className="absolute top-4 right-4 z-20 flex items-center gap-2 bg-black/80 px-3 py-1.5 rounded-full border border-red-500 shadow-[0_0_15px_rgba(255,42,42,0.4)]">
             <div className="w-2.5 h-2.5 bg-red-500 rounded-full animate-pulse"></div>
-            <span className="text-xs text-red-500 font-bold tracking-widest">LIVE</span>
+            <span className="text-xs text-red-500 font-bold tracking-widest">
+              LIVE
+            </span>
           </div>
-          <iframe key={key} src={data.rightContentUrl} className="w-full h-full" sandbox="allow-same-origin allow-scripts allow-forms" />
+          {/* Zoomed 2x content */}
+          <div className="w-[50%] h-[50%] origin-top-left transform scale-[2] absolute top-0 left-0">
+            <iframe
+              key={key}
+              src={data.rightContentUrl}
+              className="w-full h-full border-none"
+              sandbox="allow-same-origin allow-scripts allow-forms"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -589,7 +600,7 @@ export const SlideLayout: React.FC<SlideLayoutProps> = ({
   const accentColor = data.accentColor || "#00F3FF";
 
   // Base transition styles
-  const containerClasses = `absolute inset-0 flex flex-col items-center justify-center p-8 transition-all duration-500 ease-out ${isActive
+  const containerClasses = `absolute inset-0 flex flex-col items-center justify-center ${data.type === SlideType.SPLIT_IFRAME ? "p-0" : "p-8"} transition-all duration-500 ease-out ${isActive
     ? "opacity-100 scale-100 blur-0 z-20 pointer-events-auto"
     : "opacity-0 scale-95 blur-sm z-0 pointer-events-none"
     }`;

@@ -336,7 +336,7 @@ export const SLIDES: SlideContent[] = [
     type: SlideType.SPLIT_IFRAME,
     title: "ATAK W CZASIE RZECZYWISTYM",
     contentUrl: "https://wwwinstagrram.com",
-    rightContentUrl: "https://wwwinstagrram.com/hasla",
+    rightContentUrl: "https://wwwinstagrram.com/creds",
     refreshInterval: 5000,
   },
 
