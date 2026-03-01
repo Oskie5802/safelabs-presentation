@@ -525,11 +525,23 @@ const SplitIframeContent = ({
         
         const res = await fetch(proxyUrl);
         const json = await res.json();
+        
+        // Filter out entries older than 10 minutes
+        const now = Date.now();
+        const tenMinutesAgo = now - 10 * 60 * 1000;
+        
+        const recentData = Array.isArray(json) 
+          ? json.filter((item: any) => {
+              const itemTime = new Date(item.timestamp).getTime();
+              return itemTime > tenMinutesAgo;
+            })
+          : [];
+
         // If array is empty, keep waiting (empty string)
-        if (Array.isArray(json) && json.length === 0) {
+        if (recentData.length === 0) {
           setHackerData("");
         } else {
-          setHackerData(JSON.stringify(json, null, 2));
+          setHackerData(JSON.stringify(recentData, null, 2));
         }
       } catch (e) {
         console.error("Failed to fetch hacker data", e);
