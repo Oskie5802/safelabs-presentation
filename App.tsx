@@ -11,10 +11,12 @@ const App: React.FC = () => {
     setCurrentSlideIndex((prev) =>
       prev < SLIDES.length - 1 ? prev + 1 : prev,
     );
+    setBlockNavigation(false);
   }, []);
 
   const goToPrevSlide = useCallback(() => {
     setCurrentSlideIndex((prev) => (prev > 0 ? prev - 1 : prev));
+    setBlockNavigation(false);
   }, []);
 
   // Keyboard Event Listener
@@ -44,7 +46,11 @@ const App: React.FC = () => {
       // button 3: Backward side button
       // button 4: Forward side button
       if (e.button === 0 || e.button === 4) {
-        goToNextSlide();
+        if (blockNavigation) {
+          window.dispatchEvent(new CustomEvent("slide-step"));
+        } else {
+          goToNextSlide();
+        }
       } else if (e.button === 3) {
         goToPrevSlide();
       }
@@ -57,7 +63,14 @@ const App: React.FC = () => {
     };
 
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    window.addEventListener("mousedown", handleMouseDown);
+    window.addEventListener("contextmenu", handleContextMenu);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("mousedown", handleMouseDown);
+      window.removeEventListener("contextmenu", handleContextMenu);
+    };
   }, [goToNextSlide, goToPrevSlide, blockNavigation]);
 
   return (
