@@ -19,6 +19,11 @@ export interface SlideContent {
   mainText?: string;
   description?: string;
   bulletPoints?: string[];
+  partners?: {
+    name: string;
+    href: string;
+    logoUrl: string;
+  }[];
   icon?: LucideIcon;
   accentColor?: string;
   contentUrl?: string; // URL dla iframe

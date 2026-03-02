@@ -510,6 +510,23 @@ export const SLIDES: SlideContent[] = [
     type: SlideType.TITLE,
     title: "ZAKOŃCZENIE",
     description: "Dziękujemy za uwagę.",
+    partners: [
+      {
+        name: "ZSTiB Brzesko",
+        href: "https://zstib.edu.pl/",
+        logoUrl: "https://safelabs.pl/assets/zstib-DdCdGpdU.svg",
+      },
+      {
+        name: "MOK",
+        href: "https://mok-brzesko.pl/",
+        logoUrl: "https://safelabs.pl/assets/mok-logo-DYVVDbFf.png",
+      },
+      {
+        name: "Biblioteka Brzesko",
+        href: "https://mok-brzesko.pl/",
+        logoUrl: "https://safelabs.pl/assets/biblioteka-DbvJfrBC.png",
+      },
+    ],
     icon: Flag,
     accentColor: "#00FF41",
   },

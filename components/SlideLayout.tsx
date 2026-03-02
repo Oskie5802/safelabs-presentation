@@ -698,6 +698,33 @@ export const SlideLayout: React.FC<SlideLayoutProps> = ({
                   </p>
                 </div>
               )}
+              {data.partners && data.partners.length > 0 && (
+                <div
+                  className="flex flex-col items-center gap-6 mt-12"
+                  style={stagger(isActive, 800, "up")}
+                >
+                  <div className="font-mono text-gray-500 text-xs md:text-sm tracking-[0.35em] uppercase">
+                    Partnerzy
+                  </div>
+                  <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
+                    {data.partners.map((partner) => (
+                      <a
+                        key={partner.name}
+                        href={partner.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="opacity-80 hover:opacity-100 transition-opacity"
+                      >
+                        <img
+                          src={partner.logoUrl}
+                          alt={partner.name}
+                          className="h-10 md:h-14 w-auto object-contain"
+                        />
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         );
