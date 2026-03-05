@@ -32,13 +32,13 @@ import authenticatorImg from "./assets/authenticator.png";
 import fakeigImg from "./assets/fakeig.png";
 import freeiphoneImg from "./assets/freeiphone.png";
 import gpsImg from "./assets/gps.png";
+import kluczImg from "./assets/klucz.jpeg";
 import mailImg from "./assets/mail.png";
 import mailDetailsImg from "./assets/maildetails.png";
 import osintImg from "./assets/osint.png";
 import oszustwoBlikImg from "./assets/oszustwo-blik.png";
 import paczkaImg from "./assets/paczka.png";
 import smsImg from "./assets/sms.png";
-import kluczImg from "./assets/klucz.jpeg";
 
 /**
  * ==========================================
@@ -458,10 +458,9 @@ export const SLIDES: SlideContent[] = [
     title: "FIZYCZNE BEZPIECZEŃSTWO",
     mainText: "CZEGO NIE WPINAĆ?",
     bulletPoints: [
-      "Znalezione pendrive'y (mogą mieć wirusy)",
-      "Nieznane kable USB (mogą kraść dane)",
-      "Urządzenia typu Rubber Ducky (udają klawiaturę)",
-      "Publiczne ładowarki USB (Juice Jacking)",
+      "Znalezione pendrive'y ",
+      "Nieznane kable USB ",
+      "Urządzenia typu Rubber Ducky ",
     ],
     icon: Usb,
     accentColor: "#FF2A2A",
