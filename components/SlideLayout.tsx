@@ -329,6 +329,75 @@ const LiveDemoContent = ({
       "piesek",
       "misio",
       "sloneczko",
+      "mamusia",
+      "tatus",
+      "kochamcie",
+      "polska1",
+      "polska123",
+      "legia",
+      "wisla",
+      "lech",
+      "kasia",
+      "ania",
+      "tomek",
+      "piotr",
+      "marcin",
+      "andrzej",
+      "krzysztof",
+      "agnieszka",
+      "bartek",
+      "mateusz",
+      "dupa123",
+      "konstytucja",
+      "wolnosc",
+      "milosc",
+      "rodzina",
+      "dom",
+      "praca",
+      "szkola",
+      "wakacje",
+      "zima",
+      "lato",
+      "wiosna",
+      "jesien",
+      "styczen",
+      "luty",
+      "marzec",
+      "kwiecien",
+      "maj",
+      "czerwiec",
+      "lipiec",
+      "sierpien",
+      "wrzesien",
+      "pazdziernik",
+      "listopad",
+      "grudzien",
+      "poniedzialek",
+      "wtorek",
+      "sroda",
+      "czwartek",
+      "piatek",
+      "sobota",
+      "niedziela",
+      "policja",
+      "straz",
+      "pogotowie",
+      "ratunek",
+      "pomoc",
+      "alarm",
+      "bezpieczenstwo",
+      "haslo1",
+      "haslo2",
+      "haslo3",
+      "admin1",
+      "admin123",
+      "root",
+      "user",
+      "guest",
+      "test",
+      "qwerty12345",
+      "zxcvbnm",
+      "asdfghjkl",
     ];
 
     const interval = setInterval(() => {
@@ -339,18 +408,25 @@ const LiveDemoContent = ({
         if (newLogs.length > 25) return newLogs.slice(newLogs.length - 25);
         return newLogs;
       });
-    }, 30);
+    }, 100);
 
     const timeout = setTimeout(() => {
       clearInterval(interval);
       setIsCracking(false);
       setCracked(true);
-      const finalPass = "oskar123";
+      const finalPass = "Oskar12345";
       setLogs((prev) => [
         ...prev,
         `> Checking: oskar [FAILED]`,
+        `> Checking: Oskar [FAILED]`,
         `> Checking: oskar1 [FAILED]`,
+        `> Checking: Oskar1 [FAILED]`,
         `> Checking: oskar12 [FAILED]`,
+        `> Checking: Oskar12 [FAILED]`,
+        `> Checking: oskar123 [FAILED]`,
+        `> Checking: Oskar123 [FAILED]`,
+        `> Checking: oskar1234 [FAILED]`,
+        `> Checking: Oskar1234 [FAILED]`,
         `> Checking: ${finalPass} [SUCCESS]`,
         `> PASSWORD FOUND: ${finalPass}`,
       ]);
@@ -362,7 +438,7 @@ const LiveDemoContent = ({
         // Navigation is unblocked so next right arrow proceeds to next slide
         setBlockNavigation?.(false);
       }, 5000);
-    }, 7000); // Increased cracking time from 4s to 7s
+    }, 15000); // Increased cracking time to 15s
 
     return () => {
       clearInterval(interval);
@@ -394,13 +470,6 @@ const LiveDemoContent = ({
           </div>
         </div>
         <div className="p-10 flex flex-col gap-8 relative">
-          {cracked && viewState === "success" && (
-            <div className="absolute inset-x-0 inset-y-0 z-20 flex items-center justify-center bg-white/70 backdrop-blur-[6px] rounded-b-xl border-t-0 p-8 transition-all duration-700 opacity-0 animate-fade-in">
-              <div className="bg-green-100 border-4 border-green-500 text-green-800 px-8 py-8 rounded-xl font-bold text-4xl text-center shadow-[0_0_40px_rgba(0,255,0,0.6)] w-full transform scale-50 animate-scale-in">
-                Zalogowano pomyślnie
-              </div>
-            </div>
-          )}
           <div>
             <label className="block text-gray-600 text-xl font-bold mb-3">
               Email
@@ -417,7 +486,7 @@ const LiveDemoContent = ({
               Hasło
             </label>
             <input
-              type="password"
+              type={cracked ? "text" : "password"}
               value={password}
               readOnly
               className={`w-full border-2 rounded-lg p-4 text-2xl focus:outline-none transition-colors duration-300 ${cracked ? "border-green-500 bg-green-50 text-green-700 font-bold" : "border-gray-300 text-gray-800 bg-gray-50 font-medium"}`}

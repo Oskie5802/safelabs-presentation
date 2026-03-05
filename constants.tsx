@@ -20,6 +20,7 @@ import {
   Siren,
   Smartphone,
   Terminal,
+  Usb,
   UserRound,
   Users,
   UserX,
@@ -435,6 +436,34 @@ export const SLIDES: SlideContent[] = [
       "Zdjęcia kluczy do mieszkania",
     ],
     icon: Globe,
+    accentColor: "#FF2A2A",
+  },
+
+  // === HARDWARE SECURITY (NOWA SEKCJA) ===
+
+  // SLAJD 21.6: Tytuł Hardware
+  {
+    id: "hardware-title",
+    type: SlideType.TITLE,
+    title: "UWAŻAJ",
+    subtitle: "CO PODŁĄCZASZ DO KOMPUTERA",
+    icon: Usb,
+    accentColor: "#FF2A2A",
+  },
+
+  // SLAJD 21.7: Czego nie wpinać
+  {
+    id: "hardware-donts",
+    type: SlideType.LIST,
+    title: "FIZYCZNE BEZPIECZEŃSTWO",
+    mainText: "CZEGO NIE WPINAĆ?",
+    bulletPoints: [
+      "Znalezione pendrive'y (mogą mieć wirusy)",
+      "Nieznane kable USB (mogą kraść dane)",
+      "Urządzenia typu Rubber Ducky (udają klawiaturę)",
+      "Publiczne ładowarki USB (Juice Jacking)",
+    ],
+    icon: Usb,
     accentColor: "#FF2A2A",
   },
 
