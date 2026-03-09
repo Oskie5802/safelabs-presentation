@@ -377,6 +377,32 @@ export const SLIDES: SlideContent[] = [
     icon: BrainCircuit,
   },
 
+  // === HARDWARE SECURITY (NOWA SEKCJA) ===
+
+  // SLAJD 21.6: Tytuł Hardware
+  {
+    id: "hardware-title",
+    type: SlideType.TITLE,
+    title: "UWAŻAJ",
+    subtitle: "CO PODŁĄCZASZ DO KOMPUTERA",
+    icon: Usb,
+    accentColor: "#FF2A2A",
+  },
+
+  // SLAJD 21.7: Czego nie wpinać
+  {
+    id: "hardware-donts",
+    type: SlideType.LIST,
+    title: "FIZYCZNE BEZPIECZEŃSTWO",
+    mainText: "CZEGO NIE WPINAĆ?",
+    bulletPoints: [
+      "Znalezione pendrive'y ",
+      "Nieznane kable USB ",
+      "Urządzenia typu Rubber Ducky ",
+    ],
+    icon: Usb,
+    accentColor: "#FF2A2A",
+  },
   // === OSINT ===
 
   // SLAJD 20: OSINT (Tytuł sekcji)
