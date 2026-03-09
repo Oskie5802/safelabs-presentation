@@ -439,32 +439,7 @@ export const SLIDES: SlideContent[] = [
     accentColor: "#FF2A2A",
   },
 
-  // === HARDWARE SECURITY (NOWA SEKCJA) ===
-
-  // SLAJD 21.6: Tytuł Hardware
-  {
-    id: "hardware-title",
-    type: SlideType.TITLE,
-    title: "UWAŻAJ",
-    subtitle: "CO PODŁĄCZASZ DO KOMPUTERA",
-    icon: Usb,
-    accentColor: "#FF2A2A",
-  },
-
-  // SLAJD 21.7: Czego nie wpinać
-  {
-    id: "hardware-donts",
-    type: SlideType.LIST,
-    title: "FIZYCZNE BEZPIECZEŃSTWO",
-    mainText: "CZEGO NIE WPINAĆ?",
-    bulletPoints: [
-      "Znalezione pendrive'y ",
-      "Nieznane kable USB ",
-      "Urządzenia typu Rubber Ducky ",
-    ],
-    icon: Usb,
-    accentColor: "#FF2A2A",
-  },
+  
 
   // === ZAKOŃCZENIE ===
 
@@ -521,12 +496,13 @@ export const SLIDES: SlideContent[] = [
     type: SlideType.LIST,
     mainText: "POWTÓRKA",
     bulletPoints: [
-      "Różne hasła do każdego serwisu",
-      "Menedżer haseł",
+      "Zasady doboru hasła",
+      "Używać menedżera haseł",
       "Weryfikacja dwuetapowa (2FA)",
       "Sprawdzanie URL i adresów e-mail",
       "Potwierdzaj prośby o pieniądze telefonicznie",
       "Nie wysyłaj zdjęć z ważnymi kodami QR",
+      "Sprawdzaj co podpinasz do swojego komputera"
     ],
     icon: ShieldCheck,
     accentColor: "#00FF41",
