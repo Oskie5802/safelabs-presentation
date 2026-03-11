@@ -125,7 +125,7 @@ export const SLIDES: SlideContent[] = [
     id: "live-demo",
     type: SlideType.TITLE,
     title: "SPRAWDŹ",
-    hideLogo: true,
+    // hideLogo: true,
     subtitle: "SWOJE HASŁO",
     icon: Globe,
     accentColor: "#00F3FF",
@@ -134,6 +134,7 @@ export const SLIDES: SlideContent[] = [
   // SLAJD 6.5: Osadzona strona (Iframe)
   {
     id: "live-demo-web",
+    hideLogo: true,
     type: SlideType.IFRAME,
     contentUrl: "https://safelabs.pl/sprawdz-haslo",
     icon: Globe,
