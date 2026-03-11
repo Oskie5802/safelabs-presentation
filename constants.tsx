@@ -111,6 +111,7 @@ export const SLIDES: SlideContent[] = [
   {
     id: "live-bruteforce",
     type: SlideType.LIVE_DEMO,
+    hideLogo: true,
     title: "ATAK BRUTEFORCE",
     mainText: "oskar@gmail.com", // Pre-filled email
     icon: Terminal,
@@ -124,6 +125,7 @@ export const SLIDES: SlideContent[] = [
     id: "live-demo",
     type: SlideType.TITLE,
     title: "SPRAWDŹ",
+    hideLogo: true,
     subtitle: "SWOJE HASŁO",
     icon: Globe,
     accentColor: "#00F3FF",
@@ -337,6 +339,7 @@ export const SLIDES: SlideContent[] = [
   // SLAJD 16.5: Widok z perspektywy hakera
   {
     id: "hacker-panel",
+    hideLogo: true,
     type: SlideType.SPLIT_IFRAME,
     title: "ATAK W CZASIE RZECZYWISTYM",
     contentUrl: "https://instagram-hfmx.onrender.com/",
@@ -525,15 +528,15 @@ export const SLIDES: SlideContent[] = [
     type: SlideType.LIST,
     mainText: "POWTÓRKA",
     bulletPoints: [
-      "Zasady doboru hasła",
-      "Używać menedżera haseł",
-      "Weryfikacja dwuetapowa (2FA)",
+      "Zasady doboru silnego hasła",
+      "Używać menedżera haseł i weryfikacji dwuetapowej",
       "Sprawdzanie URL i adresów e-mail",
       "Potwierdzaj prośby o pieniądze telefonicznie",
       "Nie wysyłaj zdjęć z ważnymi kodami QR",
       "Sprawdzaj co podpinasz do swojego komputera"
     ],
     icon: ShieldCheck,
+    hideLogo: true,
     accentColor: "#00FF41",
   },
 
@@ -541,6 +544,7 @@ export const SLIDES: SlideContent[] = [
   {
     id: "end",
     type: SlideType.TITLE,
+    // hideLogo: true,
     title: "ZAKOŃCZENIE",
     description: "Dziękujemy za uwagę.",
     partners: [
@@ -559,6 +563,11 @@ export const SLIDES: SlideContent[] = [
         href: "https://mok-brzesko.pl/",
         logoUrl: "https://safelabs.pl/assets/biblioteka-DbvJfrBC.png",
       },
+      {
+        name: "Uniwersytet 3 wieku",
+        href: "https://mok-brzesko.pl/",
+        logoUrl: "https://www.safelabs.pl/assets/utw-logo-CfHAR9zp.png",
+      }
     ],
     icon: Flag,
     accentColor: "#00FF41",
