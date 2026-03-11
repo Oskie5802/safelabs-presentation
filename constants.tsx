@@ -58,6 +58,14 @@ export const SLIDES: SlideContent[] = [
     icon: ShieldCheck,
   },
 
+  // SLAJD 5: Znane schematy
+  {
+    id: "common-patterns",
+    type: SlideType.WARNING,
+    mainText: 'Znane hasła typu: "12345678", "zaq12wsx" albo "haslo123".',
+    icon: Keyboard,
+    accentColor: "#FF2A2A",
+  },
   // SLAJD 2: Krótkie hasła
   {
     id: "short-pass",
@@ -65,15 +73,6 @@ export const SLIDES: SlideContent[] = [
     mainText: "Hasło krótsze niż 8 znaków.",
     icon: LockKeyhole,
     accentColor: "#FF2A2A", // Cyber Red
-  },
-
-  // SLAJD 3: To samo hasło
-  {
-    id: "same-pass",
-    type: SlideType.WARNING,
-    mainText: "To samo hasło do różnych portali.",
-    icon: Copy,
-    accentColor: "#FF2A2A",
   },
 
   // SLAJD 4: Dane osobowe
@@ -85,14 +84,18 @@ export const SLIDES: SlideContent[] = [
     accentColor: "#FF2A2A",
   },
 
-  // SLAJD 5: Znane schematy
+  // SLAJD 3: To samo hasło
   {
-    id: "common-patterns",
+    id: "same-pass",
     type: SlideType.WARNING,
-    mainText: 'Znane hasła typu: "12345678", "zaq12wsx" albo "haslo123".',
-    icon: Keyboard,
+    mainText: "To samo hasło do różnych portali.",
+    icon: Copy,
     accentColor: "#FF2A2A",
   },
+
+
+
+
 
   // SLAJD 5.5: Dlaczego takie zasady?
   {
@@ -465,7 +468,7 @@ export const SLIDES: SlideContent[] = [
     accentColor: "#FF2A2A",
   },
 
-  
+
 
   // === ZAKOŃCZENIE ===
 
