@@ -41,4 +41,5 @@ export interface SlideContent {
     zoom?: boolean | number;
     zoomOrigin?: { x: number; y: number };
   }[]; // Tablica zdjęć
+  hideLogo?: boolean; // Flaga pozwalająca ukryć globalne logo na danym slajdzie
 }

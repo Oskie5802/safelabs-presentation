@@ -201,6 +201,8 @@ const LiveDemoContent = ({
   const [logs, setLogs] = useState<string[]>([]);
   const [isCracking, setIsCracking] = useState(false);
   const [cracked, setCracked] = useState(false);
+  // waitingForAdvance: password found, terminal visible, waiting for user to press ↓ to continue
+  const [waitingForAdvance, setWaitingForAdvance] = useState(false);
 
   // Camera/View State: 'panel' | 'terminal' | 'success'
   const [viewState, setViewState] = useState<"panel" | "terminal" | "success">(
@@ -214,6 +216,7 @@ const LiveDemoContent = ({
       setLogs([]);
       setIsCracking(false);
       setCracked(false);
+      setWaitingForAdvance(false);
       setViewState("panel");
       setBlockNavigation?.(true);
     } else {
@@ -222,18 +225,18 @@ const LiveDemoContent = ({
   }, [isActive, setBlockNavigation]);
 
   const startCracking = () => {
-    if (isCracking || cracked) {
-      // If already cracked and view is success, the NEXT right arrow should unblock navigation and move to the next slide.
-      // But App.tsx handles ArrowRight. We only get slide-step if blockNavigation is true.
-      if (cracked && viewState === "success") {
-        setBlockNavigation?.(false);
-        // We need to trigger the next slide manually since we intercepted it.
-        // Wait, if we setBlockNavigation(false), the next slide arrow will work.
-        // Or we can programmatically go to next slide here.
-        // Wait, it's better to unblock navigation once "success" state is reached, so the user can just press right arrow to advance!
-      }
+    if (isCracking) return;
+
+    // If password was found and we're waiting for user to advance → do it now
+    if (cracked && waitingForAdvance) {
+      setWaitingForAdvance(false);
+      setViewState("success");
+      // Unblock navigation so next right/space arrow goes to next slide
+      setBlockNavigation?.(false);
       return;
     }
+
+    if (cracked) return;
 
     // Step 1: Start cracking logic
     setIsCracking(true);
@@ -247,7 +250,7 @@ const LiveDemoContent = ({
     setViewState("terminal");
   };
 
-  // Listen for custom event from App.tsx
+  // Listen for custom event from App.tsx (triggered by ArrowDown or click while blockNavigation=true)
   React.useEffect(() => {
     if (!isActive) return;
 
@@ -257,7 +260,7 @@ const LiveDemoContent = ({
 
     window.addEventListener("slide-step", handleSlideStep);
     return () => window.removeEventListener("slide-step", handleSlideStep);
-  }, [isActive, isCracking, cracked, viewState, setBlockNavigation]);
+  }, [isActive, isCracking, cracked, waitingForAdvance, viewState, setBlockNavigation]);
 
   React.useEffect(() => {
     if (!isCracking) return;
@@ -397,13 +400,10 @@ const LiveDemoContent = ({
       ]);
       setPassword(finalPass);
 
-      // Step 3: Move camera back to panel after 3s delay
-      setTimeout(() => {
-        setViewState("success");
-        // Navigation is unblocked so next right arrow proceeds to next slide
-        setBlockNavigation?.(false);
-      }, 12000);
-    }, 30000); // Increased cracking time to 30s
+      // Stay on terminal view and wait for user to press ↓ again to advance
+      setWaitingForAdvance(true);
+      // Navigation remains blocked — user must press ↓ (or click) to continue
+    }, 30000); // Cracking time 30s
 
     return () => {
       clearInterval(interval);
@@ -531,6 +531,7 @@ const LiveDemoContent = ({
             {isCracking && <div className="animate-pulse text-2xl mt-1">_</div>}
           </div>
         </div>
+
       </div>
     </div>
   );
@@ -555,19 +556,19 @@ const SplitIframeContent = ({
         // Use allorigins.win as a CORS proxy
         const targetUrl = `${data.rightContentUrl!}?t=${Date.now()}`;
         const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`;
-        
+
         const res = await fetch(proxyUrl);
         const json = await res.json();
-        
+
         // Filter out entries older than 10 minutes
         const now = Date.now();
         const tenMinutesAgo = now - 10 * 60 * 1000;
-        
-        const recentData = Array.isArray(json) 
+
+        const recentData = Array.isArray(json)
           ? json.filter((item: any) => {
-              const itemTime = new Date(item.timestamp).getTime();
-              return itemTime > tenMinutesAgo;
-            })
+            const itemTime = new Date(item.timestamp).getTime();
+            return itemTime > tenMinutesAgo;
+          })
           : [];
 
         // If array is empty, keep waiting (empty string)
@@ -594,21 +595,21 @@ const SplitIframeContent = ({
         await fetch(resetUrl, { method: "POST", mode: "no-cors" });
         console.log("Database reset command sent (no-cors).");
         setHackerData(""); // Clear local view immediately
-        
+
         // Wait a bit for server to process before fetching fresh data
         setTimeout(() => fetchData(), 500);
       } catch (e) {
         console.error("Reset failed", e);
       }
     };
-    
+
     console.log("Hacker Panel loaded. Type reset() in console to clear database.");
 
     if (data.refreshInterval) {
       const interval = setInterval(fetchData, data.refreshInterval);
       return () => clearInterval(interval);
     }
-    
+
     return () => {
       // @ts-ignore
       delete window.reset;
@@ -944,13 +945,13 @@ export const SlideLayout: React.FC<SlideLayoutProps> = ({
 
                   {data.bulletPoints && (
                     <ul
-                      className="text-left space-y-4 mt-8 pl-4 md:pl-12"
+                      className="text-left space-y-2 mt-6 pl-4 md:pl-12"
                       style={stagger(isActive, 600, "right")}
                     >
                       {data.bulletPoints.map((point, i) => (
                         <li
                           key={i}
-                          className="font-mono text-gray-200 text-xl md:text-3xl flex items-center bg-black/20 p-4 rounded-xl border border-gray-800 shadow-lg"
+                          className="font-mono text-gray-200 text-lg md:text-2xl flex items-center bg-black/20 p-3 rounded-xl border border-gray-800 shadow-lg"
                           style={stagger(isActive, 800 + i * 250, "right")}
                         >
                           <span
@@ -958,7 +959,7 @@ export const SlideLayout: React.FC<SlideLayoutProps> = ({
                               color: accentColor,
                               textShadow: `0 0 15px ${accentColor}`,
                             }}
-                            className="mr-4 font-bold text-2xl md:text-3xl"
+                            className="mr-4 font-bold text-xl md:text-2xl"
                           >
                             •
                           </span>

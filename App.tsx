@@ -89,6 +89,30 @@ const App: React.FC = () => {
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-900/10 rounded-full blur-[128px] pointer-events-none"></div>
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-900/10 rounded-full blur-[128px] pointer-events-none"></div>
 
+      {/* Global Logo */}
+      {currentSlideIndex > 0 && !SLIDES[currentSlideIndex].hideLogo && (
+        <div className="absolute top-8 left-44 z-[100] transition-opacity duration-700">
+          <a
+            href="/"
+            className="flex items-center gap-3 cursor-pointer group select-none no-drag text-left"
+          >
+            <img
+              alt="Safe Labs"
+              className="h-10 w-auto group-hover:scale-105 transition-transform duration-300 pointer-events-none object-contain"
+              src="https://www.safelabs.pl/assets/logo-B8uCK8nm.png"
+            />
+            <div className="flex flex-col leading-none pointer-events-none">
+              <span className="text-white font-bold tracking-widest text-lg font-mono">
+                SAFE
+              </span>
+              <span className="text-cybercyan font-bold tracking-[0.2em] text-sm font-mono -mt-1">
+                LABS
+              </span>
+            </div>
+          </a>
+        </div>
+      )}
+
       {/* Render All Slides (stacked, handled by opacity in SlideLayout) */}
       <div className="relative z-10 w-full h-full mx-auto">
         {SLIDES.map((slide, index) => (

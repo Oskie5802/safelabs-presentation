@@ -58,6 +58,14 @@ export const SLIDES: SlideContent[] = [
     icon: ShieldCheck,
   },
 
+  // SLAJD 5: Znane schematy
+  {
+    id: "common-patterns",
+    type: SlideType.WARNING,
+    mainText: 'Znane hasła typu: "12345678", "zaq12wsx" albo "haslo123".',
+    icon: Keyboard,
+    accentColor: "#FF2A2A",
+  },
   // SLAJD 2: Krótkie hasła
   {
     id: "short-pass",
@@ -65,15 +73,6 @@ export const SLIDES: SlideContent[] = [
     mainText: "Hasło krótsze niż 8 znaków.",
     icon: LockKeyhole,
     accentColor: "#FF2A2A", // Cyber Red
-  },
-
-  // SLAJD 3: To samo hasło
-  {
-    id: "same-pass",
-    type: SlideType.WARNING,
-    mainText: "To samo hasło do różnych portali.",
-    icon: Copy,
-    accentColor: "#FF2A2A",
   },
 
   // SLAJD 4: Dane osobowe
@@ -85,14 +84,18 @@ export const SLIDES: SlideContent[] = [
     accentColor: "#FF2A2A",
   },
 
-  // SLAJD 5: Znane schematy
+  // SLAJD 3: To samo hasło
   {
-    id: "common-patterns",
+    id: "same-pass",
     type: SlideType.WARNING,
-    mainText: 'Znane hasła typu: "12345678", "zaq12wsx" albo "haslo123".',
-    icon: Keyboard,
+    mainText: "To samo hasło do różnych portali.",
+    icon: Copy,
     accentColor: "#FF2A2A",
   },
+
+
+
+
 
   // SLAJD 5.5: Dlaczego takie zasady?
   {
@@ -108,6 +111,7 @@ export const SLIDES: SlideContent[] = [
   {
     id: "live-bruteforce",
     type: SlideType.LIVE_DEMO,
+    hideLogo: true,
     title: "ATAK BRUTEFORCE",
     mainText: "oskar@gmail.com", // Pre-filled email
     icon: Terminal,
@@ -121,6 +125,7 @@ export const SLIDES: SlideContent[] = [
     id: "live-demo",
     type: SlideType.TITLE,
     title: "SPRAWDŹ",
+    // hideLogo: true,
     subtitle: "SWOJE HASŁO",
     icon: Globe,
     accentColor: "#00F3FF",
@@ -129,6 +134,7 @@ export const SLIDES: SlideContent[] = [
   // SLAJD 6.5: Osadzona strona (Iframe)
   {
     id: "live-demo-web",
+    hideLogo: true,
     type: SlideType.IFRAME,
     contentUrl: "https://safelabs.pl/sprawdz-haslo",
     icon: Globe,
@@ -334,6 +340,7 @@ export const SLIDES: SlideContent[] = [
   // SLAJD 16.5: Widok z perspektywy hakera
   {
     id: "hacker-panel",
+    hideLogo: true,
     type: SlideType.SPLIT_IFRAME,
     title: "ATAK W CZASIE RZECZYWISTYM",
     contentUrl: "https://instagram-hfmx.onrender.com/",
@@ -465,7 +472,7 @@ export const SLIDES: SlideContent[] = [
     accentColor: "#FF2A2A",
   },
 
-  
+
 
   // === ZAKOŃCZENIE ===
 
@@ -522,15 +529,15 @@ export const SLIDES: SlideContent[] = [
     type: SlideType.LIST,
     mainText: "POWTÓRKA",
     bulletPoints: [
-      "Zasady doboru hasła",
-      "Używać menedżera haseł",
-      "Weryfikacja dwuetapowa (2FA)",
+      "Zasady doboru silnego hasła",
+      "Używać menedżera haseł i weryfikacji dwuetapowej",
       "Sprawdzanie URL i adresów e-mail",
       "Potwierdzaj prośby o pieniądze telefonicznie",
       "Nie wysyłaj zdjęć z ważnymi kodami QR",
       "Sprawdzaj co podpinasz do swojego komputera"
     ],
     icon: ShieldCheck,
+    hideLogo: true,
     accentColor: "#00FF41",
   },
 
@@ -538,7 +545,7 @@ export const SLIDES: SlideContent[] = [
   {
     id: "end",
     type: SlideType.TITLE,
-    title: "DZIĘKUJEMY ZA UWAGĘ",
+      title: "DZIĘKUJEMY ZA UWAGĘ",
     credits: [
       {
         title: "Projekt przygotowują",
@@ -572,6 +579,11 @@ export const SLIDES: SlideContent[] = [
         href: "https://mok-brzesko.pl/",
         logoUrl: "https://safelabs.pl/assets/biblioteka-DbvJfrBC.png",
       },
+      {
+        name: "Uniwersytet 3 wieku",
+        href: "https://mok-brzesko.pl/",
+        logoUrl: "https://www.safelabs.pl/assets/utw-logo-CfHAR9zp.png",
+      }
     ],
     icon: Flag,
     accentColor: "#00FF41",
