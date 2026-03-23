@@ -731,6 +731,31 @@ export const SlideLayout: React.FC<SlideLayoutProps> = ({
                   </p>
                 </div>
               )}
+
+              {data.credits && data.credits.length > 0 && (
+                <div
+                  className="flex flex-col items-center gap-8 mt-12 w-full max-w-5xl mx-auto"
+                  style={stagger(isActive, 600, "up")}
+                >
+                  <div className="flex flex-col md:flex-row gap-12 md:gap-24 w-full justify-center items-start">
+                    {data.credits.map((section, idx) => (
+                      <div key={idx} className="flex flex-col items-center text-center">
+                        <div className="font-mono text-gray-400 text-sm md:text-base tracking-[0.2em] uppercase mb-4 border-b border-gray-800 pb-2 w-full whitespace-nowrap">
+                          {section.title}
+                        </div>
+                        <ul className="space-y-2">
+                          {section.people.map((person, pIdx) => (
+                            <li key={pIdx} className="font-mono text-gray-200 text-lg md:text-xl font-medium whitespace-nowrap">
+                              {person}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {data.partners && data.partners.length > 0 && (
                 <div
                   className="flex flex-col items-center gap-6 mt-12"

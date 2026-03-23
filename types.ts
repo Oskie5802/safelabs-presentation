@@ -29,6 +29,10 @@ export interface SlideContent {
   contentUrl?: string; // URL dla iframe
   rightContentUrl?: string; // URL dla prawego iframe (SPLIT_IFRAME)
   refreshInterval?: number; // Czas odświeżania w ms (np. dla prawego iframe)
+  credits?: {
+    title: string;
+    people: string[];
+  }[];
   images?: {
     url: string;
     caption?: string;

@@ -538,8 +538,24 @@ export const SLIDES: SlideContent[] = [
   {
     id: "end",
     type: SlideType.TITLE,
-    title: "ZAKOŃCZENIE",
-    description: "Dziękujemy za uwagę.",
+    title: "DZIĘKUJEMY ZA UWAGĘ",
+    credits: [
+      {
+        title: "Projekt przygotowują",
+        people: [
+          "Kamil Zdebski",
+          "Mikołaj Piech",
+          "Oskar Minor",
+          "Oskar Śledź",
+          "Oscar Mika",
+          "Emilia Zawada",
+        ],
+      },
+      {
+        title: "Opiekunowie",
+        people: ["P. Daniel Sikora", "P. Oskar Kowalski"],
+      },
+    ],
     partners: [
       {
         name: "ZSTiB Brzesko",
