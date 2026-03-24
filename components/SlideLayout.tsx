@@ -643,7 +643,7 @@ const SplitIframeContent = ({
           </div>
 
           <div className="relative flex-1 w-full overflow-hidden bg-white">
-            <div className="w-[125%] h-[125%] origin-top-left transform scale-90 absolute top-0 left-0">
+            <div className="w-[125%] h-[125%] origin-top-left transform scale-[80%] absolute top-0 left-0">
               <iframe
                 src={data.contentUrl}
                 className="w-full h-full border-none"
