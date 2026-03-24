@@ -1,15 +1,20 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { SlideLayout } from "./components/SlideLayout";
 import { SLIDES } from "./constants";
+import { SlideContent } from "./types";
 
-const App: React.FC = () => {
+interface AppProps {
+  slides?: SlideContent[];
+}
+
+const App: React.FC<AppProps> = ({ slides = SLIDES }) => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [blockNavigation, setBlockNavigation] = useState(false);
 
   // Navigation Logic
   const goToNextSlide = useCallback(() => {
     setCurrentSlideIndex((prev) =>
-      prev < SLIDES.length - 1 ? prev + 1 : prev,
+      prev < slides.length - 1 ? prev + 1 : prev,
     );
     setBlockNavigation(false);
   }, []);
@@ -90,7 +95,7 @@ const App: React.FC = () => {
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-900/10 rounded-full blur-[128px] pointer-events-none"></div>
 
       {/* Global Logo */}
-      {currentSlideIndex > 0 && !SLIDES[currentSlideIndex].hideLogo && (
+      {currentSlideIndex > 0 && !slides[currentSlideIndex].hideLogo && (
         <div className="absolute top-8 left-44 z-[100] transition-opacity duration-700">
           <a
             href="/"
@@ -115,7 +120,7 @@ const App: React.FC = () => {
 
       {/* Render All Slides (stacked, handled by opacity in SlideLayout) */}
       <div className="relative z-10 w-full h-full mx-auto">
-        {SLIDES.map((slide, index) => (
+        {slides.map((slide, index) => (
           <SlideLayout
             key={slide.id}
             data={slide}
