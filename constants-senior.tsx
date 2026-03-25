@@ -2,6 +2,7 @@ import {
   Banknote,
   BrainCircuit,
   Copy,
+  FishSymbol,
   Flag,
   Globe,
   Image as ImageIcon,
@@ -193,6 +194,17 @@ export const SENIOR_SLIDES: SlideContent[] = [
         className: "h-[70vh] w-auto",
       },
     ],
+  },
+
+  // === SEKCJA PHISHING ===
+  {
+    id: "phishing-section",
+    type: SlideType.TITLE,
+    title: "PHISHING",
+    subtitle: "JAK TO DZIAŁA?",
+    description: "Wyjaśnienie mechanizmu wyłudzania danych.",
+    icon: FishSymbol,
+    accentColor: "#FF2A2A",
   },
 
   // === PRZYKŁADY ===

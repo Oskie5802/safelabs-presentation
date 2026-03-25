@@ -33,6 +33,12 @@ const App: React.FC<AppProps> = ({ slides = SLIDES }) => {
         return;
       }
 
+      // Escape skips the bruteforce animation entirely
+      if (blockNavigation && e.key === "Escape") {
+        goToNextSlide();
+        return;
+      }
+
       // Blokujemy przejście dalej jeśli animacja nie jest zakończona
       if (blockNavigation && (e.key === "ArrowRight" || e.key === "Space")) {
         return;
