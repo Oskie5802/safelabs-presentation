@@ -429,7 +429,7 @@ const LiveDemoContent = ({
             Panel Logowania
           </span>
           <div className="flex gap-3">
-            <div className="w-4 h-4 rounded-full bg-red-400"></div>
+            <div className="w-4 h-4 rounded-full bg-blue-400"></div>
             <div className="w-4 h-4 rounded-full bg-yellow-400"></div>
             <div className="w-4 h-4 rounded-full bg-green-400"></div>
           </div>
@@ -489,7 +489,7 @@ const LiveDemoContent = ({
             root@kali:~/hydra
           </span>
           <div className="flex gap-2">
-            <div className="w-4 h-4 rounded-full bg-red-500/50"></div>
+            <div className="w-4 h-4 rounded-full bg-blue-500/50"></div>
             <div className="w-4 h-4 rounded-full bg-yellow-500/50"></div>
             <div className="w-4 h-4 rounded-full bg-green-500/50"></div>
           </div>
@@ -520,7 +520,7 @@ const LiveDemoContent = ({
                   {log.includes("[FAILED]") ? (
                     <>
                       {log.split("[FAILED]")[0]}
-                      <span className="text-red-500 font-bold">[FAILED]</span>
+                      <span className="text-cyan-400 font-bold">[FAILED]</span>
                     </>
                   ) : (
                     log
@@ -627,7 +627,7 @@ const SplitIframeContent = ({
           {/* Fake Browser Bar */}
           <div className="bg-gray-100 border-b border-gray-200 px-3 py-2 flex items-center gap-3 shrink-0">
             <div className="flex gap-1.5">
-              <div className="w-2.5 h-2.5 rounded-full bg-red-400"></div>
+              <div className="w-2.5 h-2.5 rounded-full bg-blue-400"></div>
               <div className="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
               <div className="w-2.5 h-2.5 rounded-full bg-green-400"></div>
             </div>
@@ -656,7 +656,7 @@ const SplitIframeContent = ({
 
       {/* Hacker View - 1/3 width */}
       <div className="flex-1 flex flex-col items-center bg-black">
-        <h3 className="flex items-center justify-center gap-3 text-xl font-bold font-mono text-red-500 tracking-wider py-2 w-full bg-gray-900 border-b border-gray-800">
+        <h3 className="flex items-center justify-center gap-3 text-xl font-bold font-mono text-cyan-400 tracking-wider py-2 w-full bg-gray-900 border-b border-gray-800">
           HAKER (PANEL)<span className="animate-pulse">🔴</span>
         </h3>
         <div className="w-full h-full relative overflow-auto bg-gray-950 p-4 font-mono text-sm">

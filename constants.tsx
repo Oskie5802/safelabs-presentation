@@ -64,7 +64,7 @@ export const SLIDES: SlideContent[] = [
     type: SlideType.WARNING,
     mainText: 'Znane hasła typu: "12345678", "zaq12wsx" albo "haslo123".',
     icon: Keyboard,
-    accentColor: "#FF2A2A",
+    accentColor: "#00F3FF",
   },
   // SLAJD 2: Krótkie hasła
   {
@@ -72,7 +72,7 @@ export const SLIDES: SlideContent[] = [
     type: SlideType.WARNING,
     mainText: "Hasło krótsze niż 8 znaków.",
     icon: LockKeyhole,
-    accentColor: "#FF2A2A", // Cyber Red
+    accentColor: "#00F3FF", // Cyber Red
   },
 
   // SLAJD 4: Dane osobowe
@@ -81,7 +81,7 @@ export const SLIDES: SlideContent[] = [
     type: SlideType.WARNING,
     mainText: "W haśle imię (swoje, psa, kota) lub data urodzenia.",
     icon: UserRound,
-    accentColor: "#FF2A2A",
+    accentColor: "#00F3FF",
   },
 
   // SLAJD 3: To samo hasło
@@ -90,7 +90,7 @@ export const SLIDES: SlideContent[] = [
     type: SlideType.WARNING,
     mainText: "To samo hasło do różnych portali.",
     icon: Copy,
-    accentColor: "#FF2A2A",
+    accentColor: "#00F3FF",
   },
 
 
@@ -104,7 +104,7 @@ export const SLIDES: SlideContent[] = [
     title: "DLACZEGO",
     subtitle: "TAKIE ZASADY?",
     icon: Info,
-    accentColor: "#FF2A2A",
+    accentColor: "#00F3FF",
   },
 
   // SLAJD X: Live Demo Bruteforce (przeniesiony)
@@ -224,7 +224,7 @@ export const SLIDES: SlideContent[] = [
     title: "PRZYKŁAD 1",
     mainText: 'SMS "Dopłata do paczki"',
     icon: MessageSquareWarning,
-    accentColor: "#FF2A2A",
+    accentColor: "#00F3FF",
     images: [{ url: paczkaImg, className: "w-[55vw] h-auto" }],
   },
 
@@ -253,7 +253,7 @@ export const SLIDES: SlideContent[] = [
     title: "PRZYKŁAD 2",
     mainText: "INSTAGRAM",
     icon: Instagram,
-    accentColor: "#FF2A2A",
+    accentColor: "#00F3FF",
     images: [{ url: freeiphoneImg, className: "w-[55vw] h-auto" }],
   },
 
@@ -282,7 +282,7 @@ export const SLIDES: SlideContent[] = [
     title: "PRZYKŁAD 3",
     mainText: "FAŁSZYWE MAILE",
     icon: MailWarning,
-    accentColor: "#FF2A2A",
+    accentColor: "#00F3FF",
     images: [{ url: mailImg }],
   },
 
@@ -309,7 +309,7 @@ export const SLIDES: SlideContent[] = [
     title: "PRZYKŁAD 4",
     mainText: "FAŁSZYWY PANEL LOGOWANIA",
     icon: LogIn,
-    accentColor: "#FF2A2A",
+    accentColor: "#00F3FF",
     images: [
       {
         url: fakeigImg,
@@ -356,7 +356,7 @@ export const SLIDES: SlideContent[] = [
     title: "SOCJOTECHNIKA",
     subtitle: "HAKOWANIE LUDZI",
     icon: Users,
-    accentColor: "#FF2A2A",
+    accentColor: "#00F3FF",
   },
 
   // SLAJD 18: Socjotechnika - Na znajomego
@@ -366,7 +366,7 @@ export const SLIDES: SlideContent[] = [
     title: "SOCJOTECHNIKA",
     mainText: 'METODA "NA ZNAJOMEGO"',
     icon: MessageSquareWarning, // Zmieniono ikonę, żeby nie duplikować Users z tytułu sekcji
-    accentColor: "#FF2A2A",
+    accentColor: "#00F3FF",
     images: [
       {
         url: oszustwoBlikImg,
@@ -393,7 +393,7 @@ export const SLIDES: SlideContent[] = [
     title: "UWAŻAJ",
     subtitle: "CO PODŁĄCZASZ DO KOMPUTERA",
     icon: Usb,
-    accentColor: "#FF2A2A",
+    accentColor: "#00F3FF",
   },
 
   // SLAJD 21.7: Czego nie wpinać
@@ -408,7 +408,7 @@ export const SLIDES: SlideContent[] = [
       "Urządzenia typu Rubber Ducky ",
     ],
     icon: Usb,
-    accentColor: "#FF2A2A",
+    accentColor: "#00F3FF",
   },
   // === OSINT ===
 
@@ -430,7 +430,7 @@ export const SLIDES: SlideContent[] = [
     mainText: "Kody QR",
     description: "Uważaj gdzie zamieszczasz kody QR.",
     icon: QrCode,
-    accentColor: "#FF2A2A",
+    accentColor: "#00F3FF",
     images: [
       {
         url: osintImg,
@@ -447,7 +447,7 @@ export const SLIDES: SlideContent[] = [
     mainText: "JAK ŁATWO DOROBIĆ KLUCZ",
     description: "Wystarczy zdjęcie klucza, by stworzyć jego kopię.",
     icon: ImageIcon,
-    accentColor: "#FF2A2A",
+    accentColor: "#00F3FF",
     images: [
       {
         url: kluczImg,
@@ -469,7 +469,7 @@ export const SLIDES: SlideContent[] = [
       "Zdjęcia kluczy do mieszkania",
     ],
     icon: Globe,
-    accentColor: "#FF2A2A",
+    accentColor: "#00F3FF",
   },
 
 
@@ -483,7 +483,7 @@ export const SLIDES: SlideContent[] = [
     title: "CO ROBIĆ",
     subtitle: "JAK JEST PRZYPAŁ?",
     icon: Siren,
-    accentColor: "#FF2A2A",
+    accentColor: "#00F3FF",
   },
 
   // SLAJD 23: Kliknąłem w link
