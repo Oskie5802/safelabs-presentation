@@ -307,6 +307,7 @@ export const SENIOR_SLIDES: SlideContent[] = [
     type: SlideType.SPLIT_IFRAME,
     title: "ATAK W CZASIE RZECZYWISTYM",
     contentUrl: "https://s--minoroskar18.replit.app",
+    fakeUrl: "https://wwwfaccebook.com",
     rightContentUrl: "https://s--minoroskar18.replit.app/creds",
     refreshInterval: 2000,
   },

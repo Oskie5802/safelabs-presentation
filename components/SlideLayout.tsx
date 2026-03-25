@@ -638,7 +638,7 @@ const SplitIframeContent = ({
             </div>
             <div className="flex-1 bg-white border border-gray-300 rounded px-2 py-1 flex items-center gap-2 text-xs text-gray-600 font-sans shadow-sm overflow-hidden whitespace-nowrap">
               <Lock size={12} className="text-green-600 shrink-0" />
-              <span className="truncate">https://wwwinstagrram.com</span>
+              <span className="truncate">{data.fakeUrl ?? "https://wwwinstagrram.com"}</span>
             </div>
           </div>
 

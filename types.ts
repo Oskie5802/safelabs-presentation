@@ -27,6 +27,7 @@ export interface SlideContent {
   icon?: LucideIcon;
   accentColor?: string;
   contentUrl?: string; // URL dla iframe
+  fakeUrl?: string; // Fake URL shown in the browser bar of SPLIT_IFRAME
   rightContentUrl?: string; // URL dla prawego iframe (SPLIT_IFRAME)
   refreshInterval?: number; // Czas odświeżania w ms (np. dla prawego iframe)
   credits?: {
